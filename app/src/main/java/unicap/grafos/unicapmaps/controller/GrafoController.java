@@ -42,25 +42,39 @@ public class GrafoController {
         }
         return lista;
     }
-    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
-    public ArrayList<Aresta> BuscaEmProfundidade(Vertice partida, Vertice chegada, Grafo map){
-        //Variaveis
-        int [] vetId ;
-        vetId = new int [map.countVertices()];int j=0, i=0;
-        Vertice vAt;
-        Aresta arestaAT;
-        ArrayList<Aresta> arestasDovAt, caminho = new ArrayList<Aresta>();
-        Queue <Vertice> filaRetorno = new ArrayDeque<Vertice>();
-        filaRetorno.add(partida);
-        vAt = filaRetorno.peek();
-        arestasDovAt=vAt.getArestas();
+    public ArrayList<Aresta> BuscaEmProfundidade(Vertice partida, Vertice chegada) {
+        boolean visitados [] = new boolean [grafo.countVertices()];
+        int i;
+        ArrayList<Aresta> caminho=new ArrayList<Aresta>();
+        for(i=0;i<grafo.countVertices();i++){visitados[i]=false;}//incializa com branco
+        return MetodoDaBuscaEmProfundidade(visitados,partida,chegada,caminho);
+    }
+    public ArrayList<Aresta> MetodoDaBuscaEmProfundidade(boolean visitados[],Vertice raiz, Vertice chegada,ArrayList<Aresta>caminho){
+        int i=0;
+        visitados[raiz.getId()]=true;
+        Aresta arestaAt;//arestas atual
+        ArrayList<Aresta> arestasAdjacentesVat;arestasAdjacentesVat=raiz.getArestas();
+        arestaAt = arestasAdjacentesVat.get(i);//pega uma aresta do array
+        caminho.add(arestaAt);
+        while (!caminho.isEmpty()){
+            if(arestaAt.getA() == raiz) {
+                if (arestaAt.getB() == chegada)
+                    return caminho;
+            }
+            else if (arestaAt.getB() == chegada){
+                        return caminho;
+            }
+            else{
+                if (raiz == arestaAt.getA()) {
+                        MetodoDaBuscaEmProfundidade(visitados, arestaAt.getB(), chegada, caminho);
+                } else {
+                    MetodoDaBuscaEmProfundidade(visitados, arestaAt.getA(), chegada, caminho);
+                }
 
-        while (!filaRetorno.isEmpty()){//percorrer Grafo
-            arestaAT=arestasDovAt.get(0);
-            caminho.add(j,arestaAT);j++;
+            }
 
         }
-            return null;
+        return null;
     }
 
     public void showAresta(Grafo grafo, ArestaView arestaView, int idAresta) {
