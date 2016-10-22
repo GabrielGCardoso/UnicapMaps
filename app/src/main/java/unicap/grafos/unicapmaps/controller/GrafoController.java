@@ -52,25 +52,26 @@ public class GrafoController {
     public ArrayList<Aresta> MetodoDaBuscaEmProfundidade(boolean visitados[],Vertice raiz, Vertice chegada,ArrayList<Aresta>caminho){
         int i=0;
         visitados[raiz.getId()]=true;
+        Vertice vAt = raiz;//Vertice de partida
         Aresta arestaAt;//arestas atual
         ArrayList<Aresta> arestasAdjacentesVat;arestasAdjacentesVat=raiz.getArestas();
         arestaAt = arestasAdjacentesVat.get(i);//pega uma aresta do array
         caminho.add(arestaAt);
         while (!caminho.isEmpty()){
-            if(arestaAt.getA() == raiz) {
+            if(arestaAt.getA() == vAt) {
                 if (arestaAt.getB() == chegada)
                     return caminho;
+                else {
+                    vAt=arestaAt.getB();i++;
+                }
             }
-            else if (arestaAt.getB() == chegada){
-                        return caminho;
+            else if(arestaAt.getB() == vAt) {
+                if (arestaAt.getA() == chegada) {
+                    return caminho;
+                }
             }
             else{
-                if (raiz == arestaAt.getA()) {
-                        MetodoDaBuscaEmProfundidade(visitados, arestaAt.getB(), chegada, caminho);
-                } else {
-                    MetodoDaBuscaEmProfundidade(visitados, arestaAt.getA(), chegada, caminho);
-                }
-
+                i++;
             }
 
         }
