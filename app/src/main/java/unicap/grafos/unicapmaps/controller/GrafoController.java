@@ -51,32 +51,43 @@ public class GrafoController {
     }
     public ArrayList<Aresta> MetodoDaBuscaEmProfundidade(boolean visitados[],Vertice raiz, Vertice chegada,ArrayList<Aresta>caminho){
         int i=0;
-        visitados[raiz.getId()]=true;
-        Vertice vAt = raiz;//Vertice de partida
+        visitados[raiz.getId()]=true;//matriz da cor cinza
+        Vertice vAt = raiz,vProx;//Vertice de partida A proximo vertice B (ou o contrario)
         Aresta arestaAt;//arestas atual
         ArrayList<Aresta> arestasAdjacentesVat;arestasAdjacentesVat=raiz.getArestas();
         arestaAt = arestasAdjacentesVat.get(i);//pega uma aresta do array
         caminho.add(arestaAt);
-        while (!caminho.isEmpty()){
-            if(arestaAt.getA() == vAt) {
-                if (arestaAt.getB() == chegada)
-                    return caminho;
-                else {
-                    vAt=arestaAt.getB();i++;
-                }
-            }
-            else if(arestaAt.getB() == vAt) {
-                if (arestaAt.getA() == chegada) {
-                    return caminho;
-                }
-            }
-            else{
-                i++;
-            }
+        vProx=arestaAt.getB();
+        while (!caminho.isEmpty()){//enquanto nao estiver vazio
+            /*Considerando q Vertice A ele esta e o B onde chega*/
+            //if(arestaAt.getA() == vAt)
+            //    vProx = arestaAt.getB();
+            //else
+            //   vProx= arestaAt.getA();
 
-        }
+            if (vProx == chegada)
+                    return caminho;
+            else {
+                for (i = 0; i <= arestasAdjacentesVat.size(); i++){
+                    if(visitados[vProx.getId()]==false)
+                        vProx = arestaAt.getB();
+                    else{
+                        arestaAt = arestasAdjacentesVat.get(i);
+                        if(vAt == arestaAt.getA()){
+
+                        }
+                    }
+                }
+                if (visitados[vProx.getId()]==true){
+
+                }
+                vAt=vProx;
+                arestasAdjacentesVat = vAt.getArestas();
+                arestaAt = arestasAdjacentesVat.get(i);
+                }
+        }//fecha while
         return null;
-    }
+    }//Fim do método
 
     public void showAresta(Grafo grafo, ArestaView arestaView, int idAresta) {
         Aresta aresta = grafo.getAresta(idAresta);
