@@ -29,12 +29,16 @@ public class GrafoController {
     private Grafo grafo;
 
     public GrafoController(){
-        Grafo.getInstance();
+
+        grafo = Grafo.getInstance();
     }
 
-    public StringBuilder exibirArestas(Grafo grafo) {
+    public StringBuilder exibirArestas(Grafo grafo, ArrayList<Aresta> arestas) {
         StringBuilder lista = new StringBuilder();
-        for (Aresta aresta : grafo.getArestas()) {
+        if(arestas == null) {
+            arestas = grafo.getArestas();
+        }
+        for (Aresta aresta : arestas) {
             lista.append(aresta.getA().getId());
             lista.append(" -> ");
             lista.append(aresta.getB().getId());
@@ -42,6 +46,7 @@ public class GrafoController {
         }
         return lista;
     }
+
     public ArrayList<Aresta> BuscaEmProfundidade(Vertice partida, Vertice chegada) {
         boolean visitados [] = new boolean [grafo.countVertices()];
         int i;
@@ -49,44 +54,43 @@ public class GrafoController {
         for(i=0;i<grafo.countVertices();i++){visitados[i]=false;}//incializa com branco
         return MetodoDaBuscaEmProfundidade(visitados,partida,chegada,caminho);
     }
+
     public ArrayList<Aresta> MetodoDaBuscaEmProfundidade(boolean visitados[],Vertice raiz, Vertice chegada,ArrayList<Aresta>caminho){
         int i=0;
         visitados[raiz.getId()]=true;//matriz da cor cinza
         Vertice vAt = raiz,vProx;//Vertice de partida A proximo vertice B (ou o contrario)
         Aresta arestaAt;//arestas atual
         ArrayList<Aresta> arestasAdjacentesVat;arestasAdjacentesVat=raiz.getArestas();
+        Stack<Vertice>vertices = new Stack<Vertice>();//vertices para retornar
         arestaAt = arestasAdjacentesVat.get(i);//pega uma aresta do array
         caminho.add(arestaAt);
+        vertices.push(vAt);
         vProx=arestaAt.getB();
-        while (!caminho.isEmpty()){//enquanto nao estiver vazio
-            /*Considerando q Vertice A ele esta e o B onde chega*/
-            //if(arestaAt.getA() == vAt)
-            //    vProx = arestaAt.getB();
-            //else
-            //   vProx= arestaAt.getA();
+        while (!vertices.isEmpty()){//enquanto nao estiver vazio
 
             if (vProx == chegada)
                     return caminho;
             else {
-                for (i = 0; i <= arestasAdjacentesVat.size(); i++){
-                    if(visitados[vProx.getId()]==false)
-                        vProx = arestaAt.getB();
-                    else{
+                arestaAt=arestasAdjacentesVat.get(arestasAdjacentesVat.size()-1);//ultima aresta
+                vProx= arestaAt.getB();//ponto de chegada
+                if(visitados[vProx.getId()] == true){//caso todos estejam visitados
+                    vAt = vertices.pop();
+                    arestasAdjacentesVat = vAt.getArestas();
+                    arestaAt = arestasAdjacentesVat.get(0);
+                }
+                for (i = 0; i < arestasAdjacentesVat.size(); i++) {//percorrer arestas do vertice
+                    if (visitados[vProx.getId()] == false) {//se nao foi visitado
                         arestaAt = arestasAdjacentesVat.get(i);
-                        if(vAt == arestaAt.getA()){
-
-                        }
+                        vAt = vProx;
+                        vertices.push(vAt);
+                    } else {
+                        arestaAt = arestasAdjacentesVat.get(i);
+                        vProx = arestaAt.getB();
                     }
                 }
-                if (visitados[vProx.getId()]==true){
-
-                }
-                vAt=vProx;
-                arestasAdjacentesVat = vAt.getArestas();
-                arestaAt = arestasAdjacentesVat.get(i);
-                }
+            }
         }//fecha while
-        return null;
+        return caminho;
     }//Fim do método
 
     public void showAresta(Grafo grafo, ArestaView arestaView, int idAresta) {

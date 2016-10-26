@@ -19,9 +19,13 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import unicap.grafos.unicapmaps.R;
 import unicap.grafos.unicapmaps.controller.GrafoController;
+import unicap.grafos.unicapmaps.model.Aresta;
 import unicap.grafos.unicapmaps.model.Grafo;
+import unicap.grafos.unicapmaps.model.Vertice;
 
 public class Main extends AppCompatActivity {
 
@@ -34,9 +38,16 @@ public class Main extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context = getApplicationContext();
 
-
         // TUDO DAQUI PRA BAIXO AINDA É TESTE
         GrafoController grafoController = new GrafoController();
+        Vertice a = grafo.getVertice(0);
+        Vertice b = grafo.getVertice(2);
+        ArrayList<Aresta> caminho;
+
+        caminho = grafoController.BuscaEmProfundidade(a, b);
+        StringBuilder caminhoString = grafoController.exibirArestas(grafo, caminho);
+        Toast.makeText(context, caminhoString, Toast.LENGTH_LONG).show();
+
 
 
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
