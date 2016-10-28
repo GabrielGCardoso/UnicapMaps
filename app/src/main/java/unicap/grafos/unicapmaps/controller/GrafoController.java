@@ -87,15 +87,21 @@ public class GrafoController {
                 }
                 else{
                     for (i = 0; i < arestasAdjacentesVat.size(); i++) {//procura vertice adjacente nao visitado
-                        if (visitados[vProx.getId()] == false) {//se nao foi visitado
+                        if (visitados[vProx.getId()] == true) {//pega proxima aresta do vertice atual
+                            arestaAt = arestasAdjacentesVat.get(i);
+                            vProx = arestaAt.getB();
+                            if(vProx==chegada){
+                                caminho.add(arestaAt);
+                                return caminho;
+                            }
+                        //}else if(vProx == chegada){
+                        //    caminho.add(arestaAt);
+                        } else  {//se nao foi visitado
                             arestaAt = arestasAdjacentesVat.get(i);
                             vAt = vProx;
                             vertices.push(vAt);
                             vProx=arestaAt.getB();
                             break;
-                        } else {//pega proxima aresta do vertice atual
-                            arestaAt = arestasAdjacentesVat.get(i);
-                            vProx = arestaAt.getB();
                         }
                     }
                     if(visitados[vAt.getId()] == true){//caso nao tenha aresta
@@ -104,6 +110,9 @@ public class GrafoController {
                         arestaAt=arestasAdjacentesVat.get(0);
                         vProx=arestaAt.getB();
                         caminho.remove(caminho.size()-1);
+                    }
+                    else{
+                        caminho.add(arestaAt);
                     }
                     visitados[vAt.getId()]=true;
                 }
