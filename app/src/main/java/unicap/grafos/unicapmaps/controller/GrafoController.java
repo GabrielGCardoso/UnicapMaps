@@ -70,7 +70,8 @@ public class GrafoController {
         while (!vertices.isEmpty()){//enquanto nao estiver vazio
 
             /*Considerando que existe aresta do vertice para ele mesmo
-            * Vertice 'a' de partida Vertice 'b' de chegada*/
+            * Vertice 'a' de partida Vertice 'b' de chegada
+            * metodo sendo testado*/
 
             if (vProx == chegada)//testa se encontrou chegada
                     return caminho;
