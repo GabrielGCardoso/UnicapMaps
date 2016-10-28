@@ -58,37 +58,56 @@ public class GrafoController {
     public ArrayList<Aresta> MetodoDaBuscaEmProfundidade(boolean visitados[],Vertice raiz, Vertice chegada,ArrayList<Aresta>caminho){
         int i=0;
         visitados[raiz.getId()]=true;//matriz da cor cinza
-        Vertice vAt = raiz,vProx;//Vertice de partida A proximo vertice B (ou o contrario)
+        Vertice vAt = raiz,vProx;//vAt 'A' vProx 'B'
         Aresta arestaAt;//arestas atual
-        ArrayList<Aresta> arestasAdjacentesVat;arestasAdjacentesVat=raiz.getArestas();
+        ArrayList<Aresta> arestasAdjacentesVat;arestasAdjacentesVat=raiz.getArestas();//arestas adjacentes
         Stack<Vertice>vertices = new Stack<Vertice>();//vertices para retornar
-        arestaAt = arestasAdjacentesVat.get(i);//pega uma aresta do array
-        caminho.add(arestaAt);
-        vertices.push(vAt);
-        vProx=arestaAt.getB();
+        arestaAt = arestasAdjacentesVat.get(0);//pega uma aresta do array
+        caminho.add(arestaAt);//caminho para retornar
+        vertices.push(vAt);//carrega primeiro vertice na pilha
+        vProx=arestaAt.getB();//inicializa o 'B'
+
         while (!vertices.isEmpty()){//enquanto nao estiver vazio
 
-            if (vProx == chegada)
+            /*Considerando que existe aresta do vertice para ele mesmo
+            * Vertice 'a' de partida Vertice 'b' de chegada*/
+
+            if (vProx == chegada)//testa se encontrou chegada
                     return caminho;
             else {
-                arestaAt=arestasAdjacentesVat.get(arestasAdjacentesVat.size()-1);//ultima aresta
-                vProx= arestaAt.getB();//ponto de chegada
-                if(visitados[vProx.getId()] == true){//caso todos estejam visitados
-                    vAt = vertices.pop();
-                    arestasAdjacentesVat = vAt.getArestas();
-                    arestaAt = arestasAdjacentesVat.get(0);
+                if(visitados[vProx.getId()] == false){//caso padrao pega proximo
+                    vAt=vProx;
+                    visitados[vAt.getId()]=true;
+                    arestasAdjacentesVat=vAt.getArestas();
+                    arestaAt=arestasAdjacentesVat.get(0);
+                    vertices.push(vAt);
+                    vProx=arestaAt.getB();
+                    caminho.add(arestaAt);
                 }
-                for (i = 0; i < arestasAdjacentesVat.size(); i++) {//percorrer arestas do vertice
-                    if (visitados[vProx.getId()] == false) {//se nao foi visitado
-                        arestaAt = arestasAdjacentesVat.get(i);
-                        vAt = vProx;
-                        vertices.push(vAt);
-                    } else {
-                        arestaAt = arestasAdjacentesVat.get(i);
-                        vProx = arestaAt.getB();
+                else{
+                    for (i = 0; i < arestasAdjacentesVat.size(); i++) {//procura vertice adjacente nao visitado
+                        if (visitados[vProx.getId()] == false) {//se nao foi visitado
+                            arestaAt = arestasAdjacentesVat.get(i);
+                            vAt = vProx;
+                            vertices.push(vAt);
+                            vProx=arestaAt.getB();
+                            break;
+                        } else {//pega proxima aresta do vertice atual
+                            arestaAt = arestasAdjacentesVat.get(i);
+                            vProx = arestaAt.getB();
+                        }
                     }
+                    if(visitados[vAt.getId()] == true){//caso nao tenha aresta
+                        vAt=vertices.pop();
+                        arestasAdjacentesVat=vAt.getArestas();
+                        arestaAt=arestasAdjacentesVat.get(0);
+                        vProx=arestaAt.getB();
+                        caminho.remove(caminho.size()-1);
+                    }
+                    visitados[vAt.getId()]=true;
                 }
-            }
+            }//fecha else
+
         }//fecha while
         return caminho;
     }//Fim do método
