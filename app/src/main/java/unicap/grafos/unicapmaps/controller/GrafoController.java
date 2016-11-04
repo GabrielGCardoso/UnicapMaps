@@ -27,11 +27,7 @@ public class GrafoController {
         grafo = Grafo.getInstance();
     }
 
-<<<<<<< HEAD
-    public StringBuilder exibirArestas(Grafo grafo, ArrayList<Aresta> arestas) {
-=======
     public StringBuilder exibirArestas( ArrayList<Aresta> arestas) {
->>>>>>> upstream/master
         StringBuilder lista = new StringBuilder();
         if(arestas == null) {
             arestas = grafo.getArestas();
@@ -51,7 +47,6 @@ public class GrafoController {
         ArrayList<Aresta> caminho=new ArrayList<Aresta>();
         for(i=0;i<grafo.countVertices();i++){visitados[i]=false;}//incializa com branco
         return MetodoDaBuscaEmProfundidade(visitados,partida,chegada,caminho);
-<<<<<<< HEAD
     }
 
     public ArrayList<Aresta> MetodoDaBuscaEmProfundidade(boolean visitados[],Vertice raiz, Vertice chegada,ArrayList<Aresta>caminho){
@@ -73,7 +68,7 @@ public class GrafoController {
             * metodo sendo testado*/
 
             if (vProx == chegada)//testa se encontrou chegada
-                    return caminho;
+                return caminho;
             else {
                 if(visitados[vProx.getId()] == false){//caso padrao pega proximo
                     vAt=vProx;
@@ -93,81 +88,8 @@ public class GrafoController {
                                 caminho.add(arestaAt);
                                 return caminho;
                             }
-                        //}else if(vProx == chegada){
-                        //    caminho.add(arestaAt);
-                        } else  {//se nao foi visitado
-                            arestaAt = arestasAdjacentesVat.get(i);
-                            vAt = vProx;
-                            vertices.push(vAt);
-                            vProx=arestaAt.getB();
-                            break;
-                        }
-                    }
-                    if(visitados[vAt.getId()] == true){//caso nao tenha aresta
-                        vAt=vertices.pop();
-                        arestasAdjacentesVat=vAt.getArestas();
-                        arestaAt=arestasAdjacentesVat.get(0);
-                        vProx=arestaAt.getB();
-                        caminho.remove(caminho.size()-1);
-                    }
-                    else{
-                        caminho.add(arestaAt);
-                    }
-                    visitados[vAt.getId()]=true;
-                }
-            }//fecha else
-
-        }//fecha while
-        return caminho;
-    }//Fim do método
-
-    public void showAresta(Grafo grafo, ArestaView arestaView, int idAresta) {
-        Aresta aresta = grafo.getAresta(idAresta);
-        arestaView.show(aresta);
-=======
-    }
-
-    public ArrayList<Aresta> MetodoDaBuscaEmProfundidade(boolean visitados[],Vertice raiz, Vertice chegada,ArrayList<Aresta>caminho){
-        int i=0;
-        visitados[raiz.getId()]=true;//matriz da cor cinza
-        Vertice vAt = raiz,vProx;//vAt 'A' vProx 'B'
-        Aresta arestaAt;//arestas atual
-        ArrayList<Aresta> arestasAdjacentesVat;arestasAdjacentesVat=raiz.getArestas();//arestas adjacentes
-        Stack<Vertice>vertices = new Stack<Vertice>();//vertices para retornar
-        arestaAt = arestasAdjacentesVat.get(0);//pega uma aresta do array
-        caminho.add(arestaAt);//caminho para retornar
-        vertices.push(vAt);//carrega primeiro vertice na pilha
-        vProx=arestaAt.getB();//inicializa o 'B'
-
-        while (!vertices.isEmpty()){//enquanto nao estiver vazio
-
-            /*Considerando que existe aresta do vertice para ele mesmo
-            * Vertice 'a' de partida Vertice 'b' de chegada
-            * metodo sendo testado*/
-
-            if (vProx == chegada)//testa se encontrou chegada
-                    return caminho;
-            else {
-                if(visitados[vProx.getId()] == false){//caso padrao pega proximo
-                    vAt=vProx;
-                    visitados[vAt.getId()]=true;
-                    arestasAdjacentesVat=vAt.getArestas();
-                    arestaAt=arestasAdjacentesVat.get(0);
-                    vertices.push(vAt);
-                    vProx=arestaAt.getB();
-                    caminho.add(arestaAt);
-                }
-                else{
-                    for (i = 0; i < arestasAdjacentesVat.size(); i++) {//procura vertice adjacente nao visitado
-                        if (visitados[vProx.getId()] == true) {//pega proxima aresta do vertice atual
-                            arestaAt = arestasAdjacentesVat.get(i);
-                            vProx = arestaAt.getB();
-                            if(vProx==chegada){
-                                caminho.add(arestaAt);
-                                return caminho;
-                            }
-                        //}else if(vProx == chegada){
-                        //    caminho.add(arestaAt);
+                            //}else if(vProx == chegada){
+                            //    caminho.add(arestaAt);
                         } else  {//se nao foi visitado
                             arestaAt = arestasAdjacentesVat.get(i);
                             vAt = vProx;
@@ -233,11 +155,10 @@ public class GrafoController {
         ArrayList<Aresta> arestas = grafo.getArestas();
         for(Aresta atual: arestas){
             //if(atual.getA() != atual.getB()) {
-                Log.i(TAG, "id:"+ atual.getId() + " (" + atual.getA().getId() + " -> " + atual.getB().getId() +")");
+            Log.i(TAG, "id:"+ atual.getId() + " (" + atual.getA().getId() + " -> " + atual.getB().getId() +")");
             //}
         }
         TAG.getClass();
->>>>>>> upstream/master
     }
 
     public ArrayList<Vertice> buscaDijkstra(Vertice vInicial, Vertice vFinal){
@@ -245,9 +166,6 @@ public class GrafoController {
         int custoAcumulado = 0;
         ArrayList<Aresta> caminho = new ArrayList<>();
         Aresta menorAresta;
-
-
-
         while(true) {
             if(vInicial == vFinal){
                 return caminho;
@@ -271,9 +189,6 @@ public class GrafoController {
                 return null;
             }
         }
-
-
-
         */
         return null;
     }

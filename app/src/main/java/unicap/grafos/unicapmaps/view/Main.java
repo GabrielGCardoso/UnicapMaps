@@ -16,17 +16,12 @@ import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
-import java.util.ArrayList;
-
 import unicap.grafos.unicapmaps.R;
 import unicap.grafos.unicapmaps.controller.GrafoController;
 import unicap.grafos.unicapmaps.model.Aresta;
 import unicap.grafos.unicapmaps.model.Grafo;
 import unicap.grafos.unicapmaps.model.Vertice;
-<<<<<<< HEAD
-=======
 import unicap.grafos.unicapmaps.util.ZoomLayout;
->>>>>>> upstream/master
 
 public class Main extends AppCompatActivity {
 
@@ -50,23 +45,9 @@ public class Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = getApplicationContext();
-<<<<<<< HEAD
-
-        // TUDO DAQUI PRA BAIXO AINDA É TESTE
-        GrafoController grafoController = new GrafoController();
-        Vertice a = grafo.getVertice(0);
-        Vertice b = grafo.getVertice(2);
-        ArrayList<Aresta> caminho;
-
-        caminho = grafoController.BuscaEmProfundidade(a, b);
-        StringBuilder caminhoString = grafoController.exibirArestas(grafo, caminho);
-        Toast.makeText(context, caminhoString, Toast.LENGTH_LONG).show();
-
-=======
         grafoController = new GrafoController();
 
         // TUDO DAQUI PRA BAIXO AINDA É TESTE
->>>>>>> upstream/master
 
         RelativeLayout mainActivity = (RelativeLayout) findViewById(R.id.root);
         String larguraMapa = Integer.toString(mainActivity.getWidth());
