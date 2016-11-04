@@ -1,6 +1,7 @@
 package unicap.grafos.unicapmaps.dao;
 
 import unicap.grafos.unicapmaps.model.Aresta;
+import unicap.grafos.unicapmaps.model.Coordenadas;
 import unicap.grafos.unicapmaps.model.Grafo;
 import unicap.grafos.unicapmaps.model.Vertice;
 
@@ -10,38 +11,17 @@ import unicap.grafos.unicapmaps.model.Vertice;
 public class GrafoDao {
 
     private Grafo grafo;
-    private int matrizAdjacencias[][] = {
-          // A B C D E F G H I J K L M N O P Q R S T U V W
-            {0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,1,0,0}, //1  A
-            {1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0}, //2  B
-            {0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0}, //3  C
-            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //4  D
-            {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,1,0,0}, //5  E
-            {0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,1,1,0,0,0}, //6  F
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0}, //7  G
-            {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0}, //8  H = Capela
-            {0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0}, //9  I
-            {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //10 J
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1}, //11 K
-            {0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1}, //12 L
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0}, //13 M = Biblioteca
-            {0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,1,0,0,0}, //14 N
-            {0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0}, //15 O
-            {1,1,1,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0}, //16 P = Estacionamento professores
-            {0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0}, //17 Q
-            {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0}, //18 R
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //19 S = Estacionamento estudantes
-            {1,0,0,0,0,1,0,0,0,0,0,1,0,1,0,0,1,1,0,0,0,0,0}, //20 T
-            {1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0}, //21 U = Quadra de esportes
-            {0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0}, //22 V = Jardim dos patos
-            {0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0}  //23 W
-          // A B C D E F G H I J K L M N O P Q R S T U V W
-    };
-    private int grauMatriz = matrizAdjacencias[0].length;
+    private int matrizAdjacencias[][];
+    private int coordenadas[][];
+    private int grauMatriz;
+    private int coordenadasComplementares[][][];
 
 
-    public GrafoDao( ) {
-
+    public GrafoDao() {
+        matrizAdjacencias = Dados.getMatrizAdjacencias();
+        coordenadas = Dados.getCoordenadasVertices();
+        grauMatriz = matrizAdjacencias[0].length;
+        coordenadasComplementares = Dados.getCoordenadasComplementares();
     }
 
     public void montarGrafo(){
@@ -78,21 +58,44 @@ public class GrafoDao {
     private void criarVertices(){
         //criar vértices
         int i;
+
         for(i = 0; i < grauMatriz; i++){
             Vertice novo = new Vertice(i);
+            Coordenadas ponto = new Coordenadas();
+            ponto.setX(coordenadas[i][0]);
+            ponto.setY(coordenadas[i][1]);
+            novo.setCoordenadas(ponto);
             //novo.setNome(nomes[i]);
             //novo.setDescricao(descricoes[i]);
+
             grafo.addVertice(novo);
         }
     }
 
     private void configArestas(){
+        int i = 0;
+        int k, tamanho;
+
         for(Aresta aresta: grafo.getArestas()){
-            aresta.addCoord(0,0);
-            aresta.addCoord(500,500);
-            
+            Coordenadas p;
+            p = aresta.getA().getCoordenadas();
+            aresta.addCoord(p.getX(), p.getY());
+            /*
+            inserir aqui as coordenadas meio
+            */
+            tamanho = coordenadasComplementares[i].length;
+            for(k = 0; k < tamanho; k++) {
+                aresta.addCoord(coordenadasComplementares[i][k][0], coordenadasComplementares[i][k][1]);
+            }
+
+
+            p = aresta.getB().getCoordenadas();
+            aresta.addCoord(p.getX(), p.getY());
+            i++;
         }
     }
+
+
 
 
 

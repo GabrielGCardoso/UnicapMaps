@@ -8,7 +8,11 @@ public class Coordenadas {
     private int x;
     private int y;
 
-    Coordenadas(int x, int y){
+    public Coordenadas(){
+
+    }
+
+    public Coordenadas(int x, int y){
         this.x = x;
         this.y = y;
     }
