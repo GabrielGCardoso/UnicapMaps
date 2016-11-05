@@ -28,8 +28,12 @@ public class Grafo {
         return vertices;
     }
 
-    public Vertice getVertice(int i) {
-        return vertices.get(i);
+    public Vertice getVertice(int idVertice) {
+        Vertice busca = null;
+        if(idVertice < vertices.size() && idVertice >= 0) {
+            busca = vertices.get(idVertice);
+        }
+        return busca;
     }
 
     public void addVertice(Vertice novoVertice) {
@@ -56,6 +60,10 @@ public class Grafo {
     }
 
     public Aresta getAresta(int idAresta) {
-        return arestas.get(idAresta);
+        Aresta busca = null;
+        if(idAresta < arestas.size() && idAresta >= 0) {
+            busca = arestas.get(idAresta);
+        }
+        return busca;
     }
 }

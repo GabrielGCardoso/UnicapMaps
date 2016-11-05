@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -54,15 +55,12 @@ public class Main extends AppCompatActivity {
 //        Toast.makeText(context, ""+escala, Toast.LENGTH_LONG).show();
 
         /* TESTES DE GABRIEL*/
-        Vertice a = grafo.getVertice(0);
-        Vertice b = grafo.getVertice(2);
         ArrayList<Aresta> caminho;
 
-        caminho = grafoController.BuscaEmProfundidade(a, b);
+        caminho = grafoController.BuscaEmProfundidade(0, 2);
         StringBuilder caminhoString = grafoController.exibirArestas(caminho);
         //Toast.makeText(context, caminhoString, Toast.LENGTH_LONG).show();
         /*FIM DOS TESTES DE GABRIEL*/
-
 
         Button submitButton = (Button) findViewById(R.id.submit_button);
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +77,6 @@ public class Main extends AppCompatActivity {
                 limparTela();
             }
         });
-
 
 
     }
@@ -101,51 +98,26 @@ public class Main extends AppCompatActivity {
             idVerticeFinal = -1;
         }
 
+        ImageView arestaView = (ImageView) findViewById( R.id.arestaConteiner);
 
-        if(idVerticeInicial >= 0 && idVerticeFinal >= 0 && idVerticeInicial < 24 && idVerticeFinal < 24 ){
-            ImageView arestaView = (ImageView) findViewById( R.id.arestaConteiner);
+        ArestaPathView pathView = new ArestaPathView(mapaWidth, mapaHeight, escalaInicial);
+        ArrayList<Aresta> caminho = grafoController.BuscaEmProfundidade(idVerticeInicial, idVerticeFinal);
 
-
-            ArestaPathView pathView = new ArestaPathView(mapaWidth, mapaHeight, escalaInicial);
-            ArrayList<Aresta> caminho = new ArrayList<>();
-
-            Aresta aresta = grafoController.getArestaFromVertices(grafo.getVertice(idVerticeInicial), grafo.getVertice(idVerticeFinal));
-
-
-            //caminho = buscaEscolhida;
-            if(aresta != null){
-                caminho.add(aresta);
-                grafoController.exibirCaminho(arestaView, pathView, caminho, Color.BLUE);
-            } else{
-                idVerticeInicial = -1;
-                idVerticeFinal = -1;
-                return;
-            }
-
-
-            /*if(toggle) {
-                toggle = false;
-                caminhoExemplo.add(grafo.getAresta(35));
-                caminhoExemplo.add(grafo.getAresta(21));
-                caminhoExemplo.add(grafo.getAresta(84));
-                caminhoExemplo.add(grafo.getAresta(7));
-                caminhoExemplo.add(grafo.getAresta(91));
-                grafoController.exibirCaminho(arestaView, pathView, caminhoExemplo, Color.RED);
-            } else {
-                toggle = true;
-                caminhoExemplo.add(grafo.getAresta(10));
-                caminhoExemplo.add(grafo.getAresta(67));
-                caminhoExemplo.add(grafo.getAresta(85));
-                caminhoExemplo.add(grafo.getAresta(3));
-                caminhoExemplo.add(grafo.getAresta(70));
-                grafoController.exibirCaminho(arestaView, pathView, caminhoExemplo, Color.BLUE);
-            }*/
-            esconderViews();
-            arestaView.setVisibility(View.VISIBLE);
+        //caminho = buscaEscolhida;
+        if(caminho != null){
+            grafoController.exibirCaminho(arestaView, pathView, caminho, Color.BLUE);
+        } else{
+            idVerticeInicial = -1;
+            idVerticeFinal = -1;
+            Toast.makeText(context, "Vértices inválidos", Toast.LENGTH_SHORT).show();
+            return;
         }
-        idVerticeInicial = -1;
-        idVerticeFinal = -1;
+
+        esconderViews();
+        arestaView.setVisibility(View.VISIBLE);
+
     }
+
     private void limparTela() {
         EditText inputPartida = (EditText) findViewById(R.id.edit_text_partida);
         EditText inputDestino = (EditText) findViewById(R.id.edit_text_destino);
