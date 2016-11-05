@@ -40,82 +40,78 @@ public class GrafoController {
         }
         return lista;
     }
+    //pega proximo vertice nao visitado
+    public Vertice getVeticeProx(Vertice vAT,ArrayList<Boolean> visitados){
+        int i,tam = vAT.getAdjacentes().size();
+        ArrayList<Vertice> vertices=vAT.getAdjacentes();
 
-    public ArrayList<Aresta> BuscaEmProfundidade(Vertice partida, Vertice chegada) {
-        boolean visitados [] = new boolean [grafo.countVertices()];
-        int i;
-        ArrayList<Aresta> caminho=new ArrayList<Aresta>();
-        for(i=0;i<grafo.countVertices();i++){visitados[i]=false;}//incializa com branco
-        return MetodoDaBuscaEmProfundidade(visitados,partida,chegada,caminho);
+        for(i=0;i<tam;i++) {
+            vAT=vertices.get(i);
+            if (visitados.get(vAT.getId())==false)
+                return vAT;
+        }
+        if(visitados.get(vAT.getId())==false)
+            return vAT;
+        return null;
     }
+    //incia o array de boolean com false
+    public void iniciar(ArrayList<Boolean>visitados){
+        int i;
+        for(i=0;i<grafo.countVertices();i++){visitados.add(i,false);}
+    }
+    /*Metodo para transformar o stack em arraylist aresta
+    /*Está parecido com o outro metodo se quiser pode mudar*/
+    public ArrayList<Aresta> BuscaEmProfundidade(Vertice partida, Vertice chegada) {
+        int i;
+        Vertice atual,prox;
+        ArrayList<Aresta>arestas=new ArrayList<>();
+        Stack<Vertice>vertices;
+        vertices=MetodoBuscaEmProfundidade(partida, chegada);
+        for(i=0;i<vertices.size()-1;i++){
+            atual=vertices.get(i);
+            prox=vertices.get(i+1);
+            arestas.add(getArestaFromVertices(atual,prox));
+        }
+        return arestas;
+    }
+    //Metodo da busca
+    public Stack<Vertice> MetodoBuscaEmProfundidade(Vertice partida, Vertice chegada) {
+        boolean flag=false;
+        Vertice verticeAtual,verticeProximo;
+        Stack<Vertice> verticesDoCaminho= new Stack<>();
+        ArrayList<Boolean> visitado= new ArrayList<>();
+        iniciar(visitado);
 
-    public ArrayList<Aresta> MetodoDaBuscaEmProfundidade(boolean visitados[],Vertice raiz, Vertice chegada,ArrayList<Aresta>caminho){
-        int i=0;
-        visitados[raiz.getId()]=true;//matriz da cor cinza
-        Vertice vAt = raiz,vProx;//vAt 'A' vProx 'B'
-        Aresta arestaAt;//arestas atual
-        ArrayList<Aresta> arestasAdjacentesVat;arestasAdjacentesVat=raiz.getArestas();//arestas adjacentes
-        Stack<Vertice>vertices = new Stack<Vertice>();//vertices para retornar
-        arestaAt = arestasAdjacentesVat.get(0);//pega uma aresta do array
-        caminho.add(arestaAt);//caminho para retornar
-        vertices.push(vAt);//carrega primeiro vertice na pilha
-        vProx=arestaAt.getB();//inicializa o 'B'
+        verticeAtual=partida;
 
-        while (!vertices.isEmpty()){//enquanto nao estiver vazio
+        verticesDoCaminho.push(verticeAtual);//adiciona no caminho
+        visitado.set(verticeAtual.getId(),true);//foi visitado
 
-            /*Considerando que existe aresta do vertice para ele mesmo
-            * Vertice 'a' de partida Vertice 'b' de chegada
-            * metodo sendo testado*/
-
-            if (vProx == chegada)//testa se encontrou chegada
-                return caminho;
-            else {
-                if(visitados[vProx.getId()] == false){//caso padrao pega proximo
-                    vAt=vProx;
-                    visitados[vAt.getId()]=true;
-                    arestasAdjacentesVat=vAt.getArestas();
-                    arestaAt=arestasAdjacentesVat.get(0);
-                    vertices.push(vAt);
-                    vProx=arestaAt.getB();
-                    caminho.add(arestaAt);
+        while (!verticesDoCaminho.isEmpty())
+        {
+            verticeProximo=getVeticeProx(verticeAtual,visitado);//pega proximo vertice
+            if(verticeProximo==null){
+                if(flag==false) {
+                    verticeProximo = verticesDoCaminho.peek();
+                    flag = true;
                 }
-                else{
-                    for (i = 0; i < arestasAdjacentesVat.size(); i++) {//procura vertice adjacente nao visitado
-                        if (visitados[vProx.getId()] == true) {//pega proxima aresta do vertice atual
-                            arestaAt = arestasAdjacentesVat.get(i);
-                            vProx = arestaAt.getB();
-                            if(vProx==chegada){
-                                caminho.add(arestaAt);
-                                return caminho;
-                            }
-                            //}else if(vProx == chegada){
-                            //    caminho.add(arestaAt);
-                        } else  {//se nao foi visitado
-                            arestaAt = arestasAdjacentesVat.get(i);
-                            vAt = vProx;
-                            vertices.push(vAt);
-                            vProx=arestaAt.getB();
-                            break;
-                        }
-                    }
-                    if(visitados[vAt.getId()] == true){//caso nao tenha aresta
-                        vAt=vertices.pop();
-                        arestasAdjacentesVat=vAt.getArestas();
-                        arestaAt=arestasAdjacentesVat.get(0);
-                        vProx=arestaAt.getB();
-                        caminho.remove(caminho.size()-1);
-                    }
-                    else{
-                        caminho.add(arestaAt);
-                    }
-                    visitados[vAt.getId()]=true;
+                else {
+                    verticesDoCaminho.pop();//remove
+                    verticeProximo = verticesDoCaminho.peek();//recebe ultimo
+                    verticeAtual = verticeProximo;
+                    flag = false;
                 }
-            }//fecha else
-
-        }//fecha while
-        return caminho;
-    }//Fim do método
-
+            }else if(verticeProximo==chegada){
+                verticesDoCaminho.push(verticeProximo);
+                return verticesDoCaminho;
+            }else{
+                verticeAtual=verticeProximo;
+                visitado.set(verticeAtual.getId(),true);
+                verticesDoCaminho.push(verticeAtual);
+            }
+        }
+        return null;
+    }
     public ArrayList<ArrayList<Coordenadas>> buscarCoordenadas(ArrayList<Integer> idsVertices) {
         ArrayList<ArrayList<Coordenadas>> coordenadas = new ArrayList<>();
         ArrayList<Aresta> arestas = new ArrayList<>();
