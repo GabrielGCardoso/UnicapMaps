@@ -34,6 +34,36 @@ public class Dados {
             {0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}  //23 G4
             // A B C D E F G H I J K L M N O P Q R S T U V W G4
     };
+    
+    ArrayList nomesBlocos = new ArrayList<String>();
+    nomesBlocos.add("Bloco A");
+    nomesBlocos.add("Bloco B");
+    nomesBlocos.add("Bloco C");
+    nomesBlocos.add("Bloco D");
+    nomesBlocos.add("Bloco E");
+    nomesBlocos.add("Bloco F");
+    nomesBlocos.add("Bloco G");
+    nomesBlocos.add("Capela");
+    nomesBlocos.add("Bloco I");
+    nomesBlocos.add("Bloco J");
+    nomesBlocos.add("Bloco K");
+    nomesBlocos.add("Bloco L");
+    nomesBlocos.add("Biblioteca");
+    nomesBlocos.add("Bloco N");
+    nomesBlocos.add("Bloco O");
+    nomesBlocos.add("Estacionamento professores");
+    nomesBlocos.add("Bloco Q");
+    nomesBlocos.add("Bloco R");
+    nomesBlocos.add("Estacionamento estudantes");
+    nomesBlocos.add("Bloco T");
+    nomesBlocos.add("Quadra de esportes");
+    nomesBlocos.add("Jardim");
+    nomesBlocos.add("Bloco W");
+    nomesBlocos.add("Bloco G4");
+    
+    public ArrayList<String> getNomesBlocos(){
+        return nomesBlocos;   
+    }
 
     private static int coordenadasVertices[][] = {
             {300,375}, //0  A
