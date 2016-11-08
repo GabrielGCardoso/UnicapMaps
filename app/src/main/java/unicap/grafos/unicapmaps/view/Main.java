@@ -106,6 +106,8 @@ public class Main extends AppCompatActivity {
         //caminho = buscaEscolhida;
         if(caminho != null){
             grafoController.exibirCaminho(arestaView, pathView, caminho, Color.BLUE);
+            inputPartida.setText(grafo.getVertice(idVerticeInicial).getNome());
+            inputDestino.setText(grafo.getVertice(idVerticeFinal).getNome());
         } else{
             idVerticeInicial = -1;
             idVerticeFinal = -1;
@@ -144,11 +146,10 @@ public class Main extends AppCompatActivity {
         Button submitButton = (Button) findViewById(R.id.submit_button);
         Button clearButton = (Button) findViewById(R.id.clear_button);
 
-        inputDestino.setVisibility(View.INVISIBLE);
-        inputPartida.setVisibility(View.INVISIBLE);
+        //inputDestino.setVisibility(View.INVISIBLE);
+        //inputPartida.setVisibility(View.INVISIBLE);
         submitButton.setVisibility(View.INVISIBLE);
         clearButton.setVisibility(View.VISIBLE);
-
     }
 
     public void onWindowFocusChanged(boolean hasFocus) {

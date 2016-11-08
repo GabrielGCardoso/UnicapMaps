@@ -15,7 +15,7 @@ public class GrafoDao {
     private int coordenadas[][];
     private int grauMatriz;
     private int coordenadasComplementares[][][];
-    private ArrayList<String> nomesBlocos;
+    private String nomesBlocos[];
 
 
     public GrafoDao() {
@@ -27,6 +27,7 @@ public class GrafoDao {
     }
 
     public void montarGrafo(){
+
         grafo = Grafo.getInstance();
         criarVertices();
         estabelecerAdjacencias();
@@ -67,7 +68,7 @@ public class GrafoDao {
             ponto.setX(coordenadas[i][0]);
             ponto.setY(coordenadas[i][1]);
             novo.setCoordenadas(ponto);
-            novo.setNome(nomeBlocos.get(i));
+            novo.setNome(nomesBlocos[i]);
             //novo.setDescricao(descricoes[i]);
 
             grafo.addVertice(novo);
