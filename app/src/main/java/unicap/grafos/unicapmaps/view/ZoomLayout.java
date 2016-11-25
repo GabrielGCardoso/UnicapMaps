@@ -1,24 +1,20 @@
-package unicap.grafos.unicapmaps.util;
+package unicap.grafos.unicapmaps.view;
 
 /**
  * Created by Uirá Veríssimo on 09/10/2016.
  */
 
+import android.content.Context;
+import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
-import android.view.GestureDetector.SimpleOnGestureListener;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
-import android.view.animation.Transformation;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
-        import android.content.Context;
-        import android.util.AttributeSet;
-        import android.util.Log;
-        import android.view.MotionEvent;
-        import android.view.ScaleGestureDetector;
-        import android.view.View;
-        import android.widget.FrameLayout;
-import android.widget.Toast;
+import unicap.grafos.unicapmaps.R;
 
 /**
  * Layout that provides pinch-zooming of content. This view should have exactly one child
@@ -32,6 +28,8 @@ public class ZoomLayout extends FrameLayout implements ScaleGestureDetector.OnSc
         DRAG,
         ZOOM
     }
+
+    boolean infoVisible = true;
 
     private static final String TAG = "ZoomLayout";
     private static float MIN_ZOOM = 1.0f;
@@ -216,8 +214,32 @@ public class ZoomLayout extends FrameLayout implements ScaleGestureDetector.OnSc
 
     @Override
     public boolean onSingleTapConfirmed(MotionEvent e) {
-        //Log.i(TAG, "SingleTapConfirmed");
+        Log.i(TAG, "SingleTapConfirmed");
+        /*if(infoVisible){
+            esconderViews();
+            infoVisible = false;
+        } else{
+            mostrarViews();
+            infoVisible = true;
+        }
+        */
         return true;
+    }
+
+    private void esconderViews() {
+        View raiz = ((View) this.getParent()).getRootView();
+        RelativeLayout layout_info = (RelativeLayout) raiz.findViewById(R.id.layout_info);
+        RelativeLayout layout_botoes = (RelativeLayout) raiz.findViewById(R.id.layout_botoes);
+        layout_info.setVisibility(INVISIBLE);
+        layout_botoes.setVisibility(INVISIBLE);
+    }
+
+    private void mostrarViews() {
+        View raiz = ((View) this.getParent()).getRootView();
+        RelativeLayout layout_info = (RelativeLayout) raiz.findViewById(R.id.layout_info);
+        RelativeLayout layout_botoes = (RelativeLayout) raiz.findViewById(R.id.layout_botoes);
+        layout_info.setVisibility(VISIBLE);
+        layout_botoes.setVisibility(VISIBLE);
     }
 
     @Override

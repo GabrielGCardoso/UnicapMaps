@@ -1,0 +1,38 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- "Mark Favorite", should appear as action button if possible -->
+
+        <item
+            android:id="@+id/dijkstra"
+            android:title="Dijkstra"
+            />
+
+        <item android:id="@+id/profundidade"
+            android:title="Profundidade"
+            />
+
+        <item android:id="@+id/largura"
+            android:title="Largura"
+            />
+
+        <item android:id="@+id/a_estrela"
+            android:title="A*"
+            />
+
+        <item android:id="@+id/gulosa"
+            android:title="Gulosa"
+            />
+
+        <item android:id="@+id/bellman_ford"
+            android:title="Bellman-Ford"
+            />
+        <item android:id="@+id/coloracao_welsh_powell"
+            android:title="Coloração Welsh-Powell"
+            />
+
+        <item android:id="@+id/sobre"
+            android:title="sobre"
+            />
+
+
+</menu>

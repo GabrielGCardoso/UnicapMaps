@@ -6,25 +6,30 @@
         android:allowBackup="true"
         android:icon="@mipmap/icon_app"
         android:label="@string/app_name"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:screenOrientation="portrait">
-
+        android:theme="@style/AppTheme">
         <activity
             android:name=".view.SplashScreen"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
-            android:screenOrientation="portrait">
-
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
 
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".view.Main"
-            android:screenOrientation="portrait"/>
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".view.Sobre"
+            android:label="Sobre">
+
+        </activity>
     </application>
 
 </manifest>

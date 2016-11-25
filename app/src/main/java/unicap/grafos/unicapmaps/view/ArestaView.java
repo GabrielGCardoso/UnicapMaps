@@ -1,18 +1,15 @@
-package unicap.grafos.unicapmaps.util;
+package unicap.grafos.unicapmaps.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.PathDashPathEffect;
-import android.graphics.PathEffect;
 import android.util.AttributeSet;
 import android.view.View;
 
 import java.util.ArrayList;
 
-import unicap.grafos.unicapmaps.model.Aresta;
 import unicap.grafos.unicapmaps.model.Coordenadas;
 
 /**

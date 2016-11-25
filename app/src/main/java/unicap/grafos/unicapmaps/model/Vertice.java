@@ -21,8 +21,20 @@ public class Vertice {
     public ArrayList<Aresta> getArestas(){
         return arestas;
     }
+
     public void addAdjacente(Vertice novoAdj) {
         adjacentes.add(novoAdj);
+    }
+
+    public void addAdjacenteOrdenado(Vertice novoAdj){
+        int posicao = 0;
+        for(Vertice atual: adjacentes){
+            if(novoAdj.getId() < atual.getId()){
+                posicao = adjacentes.indexOf(atual);
+                break;
+            }
+        }
+        adjacentes.add(posicao, novoAdj);
     }
 
     public int getId() {

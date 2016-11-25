@@ -1,27 +1,25 @@
 package unicap.grafos.unicapmaps.model;
 
-import android.hardware.usb.UsbConfiguration;
-import android.widget.ArrayAdapter;
-
 import java.util.ArrayList;
 
 
 /**
  * Created by Cais Automação on 06/10/2016. project Unicap Maps
  */
+
 public class Aresta {
     private int id;
     private Vertice A = null;
     private Vertice B = null;
     private int custo;
-    private String descricao;
-    private ArrayList<Coordenadas> coordTrajeto;
+    private String descricao[];
+    private ArrayList<Coordenadas> coordenadas;
     //private restrições
 
-    Aresta(Vertice a, Vertice b){
+    public Aresta(Vertice a, Vertice b){
         this.A = a;
         this.B = b;
-        coordTrajeto = new ArrayList<>();
+        coordenadas = new ArrayList<>();
     }
 
     private Vertice getAdjacente(Vertice vertice){
@@ -36,13 +34,14 @@ public class Aresta {
             }
         }
     }
-    public String getDescricao() {
+    public String[] getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
+    public void setDescricao(String[] descricao) {
         this.descricao = descricao;
     }
+
     public int getId() {
         return id;
     }
@@ -77,10 +76,14 @@ public class Aresta {
 
     public void addCoord(int x, int y){
         Coordenadas novoPonto = new Coordenadas(x, y);
-        coordTrajeto.add(novoPonto);
+        coordenadas.add(novoPonto);
     }
 
-    public ArrayList<Coordenadas> getCoordTrajeto() {
-        return coordTrajeto;
+    public ArrayList<Coordenadas> getCoordenadas() {
+        return coordenadas;
+    }
+
+    public void setCoordenadas(ArrayList<Coordenadas> coordenadas) {
+        this.coordenadas = coordenadas;
     }
 }

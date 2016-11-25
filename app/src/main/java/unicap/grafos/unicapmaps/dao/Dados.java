@@ -1,207 +1,172 @@
 package unicap.grafos.unicapmaps.dao;
 
-import java.util.ArrayList;
-
 /**
  * Created by Cais Automação on 06/10/2016. project Unicap Maps
  */
-public class Dados {
+class Dados {
 
 
-    private static int matrizAdjacencias[][] = {
-     // A B C D E F G H I J K L M N O P Q R S T U V W G4
-            {1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,1,1,0,0}, //0  A
-            {1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0}, //1  B
-            {0,1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0}, //2  C
-            {1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //3  D
-            {0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0}, //4  E
-            {0,0,0,0,0,1,0,0,0,0,0,1,0,1,0,0,0,0,1,1,0,0,0,0}, //5  F
-            {0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,1}, //6  G
-            {0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0}, //7  H = Capela
-            {0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0}, //8  I
-            {0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //9  J
-            {0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,0}, //10 K
-            {0,0,0,0,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,1,0}, //11 L
-            {0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0}, //12 M = Biblioteca
-            {0,0,0,0,0,1,0,0,0,0,0,1,0,1,1,0,0,0,0,1,0,0,0,0}, //13 N
-            {0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0}, //14 O
-            {1,1,1,0,1,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0}, //15 P = Estacionamento professores
-            {0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0}, //16 Q
-            {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,0,0}, //17 R
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0}, //18 S = Estacionamento estudantes
-            {1,0,0,0,0,1,0,0,0,0,0,1,0,1,0,0,1,1,0,1,0,0,0,0}, //19 T
-            {1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,0,0,0}, //20 U = Quadra de esportes
-            {0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,0,1,0,0,0,1,0,0}, //21 V = Jardim dos patos
-            {0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0}, //22 W
-            {0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}  //23 G4
-            // A B C D E F G H I J K L M N O P Q R S T U V W G4
+    private static int matrizAdjacencias[][] = { //matriz nova com arestas simples. precisa passar o procedimento de espelhamento
+          // A B C D E F G H I J K L M N O P Q R S T U V W G4
+            {0,1,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,0,0}, //0  A
+            {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0}, //1  B
+            {0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0}, //2  C
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //3  D
+            {0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0}, //4  E
+            {0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,1,1,0,0,0,0}, //5  F
+            {0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,1,1,0,1,0,1}, //6  G
+            {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0}, //7  H = Capela
+            {0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //8  I
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //9  J
+            {0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,1,0}, //10 K
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0}, //11 L
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0}, //12 M = Biblioteca
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0}, //13 N
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //14 O
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0}, //15 P = Estacionamento professores
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0}, //16 Q
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0}, //17 R
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0}, //18 S = Estacionamento estudantes
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //19 T
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //20 U = Quadra de esportes
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //21 V = Jardim dos patos
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //22 W
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}  //23 G4
+          // A B C D E F G H I J K L M N O P Q R S T U V W G4
     };
 
-    static String[] nomesBlocos = {
-            "Bloco A",
-            "Bloco B",
-            "Bloco C",
-            "Bloco D",
-            "Bloco E",
-            "Bloco F",
-            "Bloco G",
-            "Capela",
-            "Bloco I",
-            "Bloco J",
-            "Bloco K",
-            "Bloco L",
-            "Biblioteca",
-            "Bloco N",
-            "Bloco O",
-            "Estacionamento professores",
-            "Bloco Q",
-            "Bloco R",
-            "Estacionamento estudantes",
-            "Bloco T",
-            "Quadra de esportes",
-            "Jardim",
-            "Bloco W",
-            "Bloco G4"
-        };
 
 
-
-    
-    public static String[] getNomesBlocos(){
-        return nomesBlocos;
-    }
-
-    private static int coordenadasVertices[][] = {
-            {300,375}, //0  A
-            {250,409}, //1  B
-            {206,370}, //2  C
-            {338,395}, //3  D
-            {360,270}, //4  E
-            {390,605}, //5  F
-            {272,542}, //6  G
-            {216,324}, //7  H = Capela
-            {427,212}, //8  I
-            {447, 73}, //9  J
-            {535,672}, //10 K
-            {437,635}, //11 L
-            {220,494}, //12 M = Biblioteca
-            {494,589}, //13 N
-            {540,589}, //14 O
-            {258,330}, //15 P = Estacionamento professores
-            {386,352}, //16 Q
-            {344,495}, //17 R
-            {292,605}, //18 S = Estacionamento estudantes
-            {432,521}, //19 T
-            {340,331}, //20 U = Quadra de esportes
-            {272,501}, //21 V = Jardim dos patos
-            {507,700}, //22 W
-            {185,543}, //23 G4
+    public static int coordenadasVertices[][] = {
+            { 587,810},  //0  A
+            { 556,810},  //1  B
+            { 433,735},  //2  C
+            { 661,794},  //3  D
+            { 733,508},  //4  E
+            { 812,1214}, //5  F
+            { 572,1118}, //6  G
+            { 437,649},  //7  H = Capela
+            { 850,442},  //8  I
+            { 870,209},  //9  J
+            {1091,1354}, //10 K
+            { 863,1275}, //11 L
+            { 451,989},  //12 M = Biblioteca
+            { 993,1172}, //13 N
+            {1086,1172}, //14 O
+            { 516,707},  //15 P = Estacionamento professores
+            { 752,664},  //16 Q
+            { 659,1002}, //17 R
+            { 579,1176}, //18 S = Estacionamento estudantes
+            { 860,1044}, //19 T
+            { 684,636},  //20 U = Quadra de esportes
+            { 543,1002}, //21 V = Jardim dos patos
+            {1016,1398}, //22 W
+            { 343,1116}, //23 G4
     };
 
     private static int coordenadasComplementares[][][] = {
-            {},                                             //I/ARESTA:: id:0 (0 -> 0)      A -> A
-            {{300,409}},                                    //I/ARESTA:: id:1 (0 -> 1)      A -> B
-            {{300,395}},                                    //I/ARESTA:: id:2 (0 -> 3)      A -> D
-            {{258,375}},                                    //I/ARESTA:: id:3 (0 -> 15)     A -> P
-            {{300,441}, {328,441}, {328,495}},              //I/ARESTA:: id:4 (0 -> 17)     A -> R
-            {{300,441}, {419,441}, {419,521}},              //I/ARESTA:: id:5 (0 -> 19)     A -> T
-            {{303,312}, {340,312}},                         //I/ARESTA:: id:6 (0 -> 20)     A -> U
-            {{300,441}, {320,441}, {320,481}, {294,481},{282,486}},                                             //I/ARESTA:: id:7 (0 -> 21)     A -> V
-            {{300,409}},                                    //I/ARESTA:: id:8 (1 -> 0)      B -> A
-            {},                                             //I/ARESTA:: id:9 (1 -> 1)      B -> B
-            {{212,409}},                                    //I/ARESTA:: id:10 (1 -> 2)      B -> C
-            {{258,409}},                                    //I/ARESTA:: id:11 (1 -> 15)    B -> P
-            {{212,409}},                                    //I/ARESTA:: id:12 (2 -> 1)     C -> B
-            {},                                             //I/ARESTA:: id:13 (2 -> 2)     C -> C
-            {},                                             //I/ARESTA:: id:14 (2 -> 7)     C -> H
-            {{258, 370}},                                   //I/ARESTA:: id:15 (2 -> 15)    C -> P
-            {{300,395}},                                    //I/ARESTA:: id:16 (3 -> 0)     D -> A
-            {},                                             //I/ARESTA:: id:17 (3 -> 3)     D -> D
-            {},                                             //I/ARESTA:: id:18 (4 -> 4)     E -> E
-            {},                                       //I/ARESTA:: id:19 (4 -> 8)     E -> I
-            {},                                       //I/ARESTA:: id:20 (4 -> 16)    E -> Q
-            {},                                       //I/ARESTA:: id:21 (4 -> 20)    E -> U
-            {},                                       //I/ARESTA:: id:22 (5 -> 5)     F -> F
-            {},                                       //I/ARESTA:: id:23 (5 -> 11)    F -> L
-            {},                                       //I/ARESTA:: id:24 (5 -> 13)    F -> N
-            {},                                       //I/ARESTA:: id:25 (5 -> 18)    F -> S
-            {},                                       //I/ARESTA:: id:26 (5 -> 19)    F -> T
-            {},                                       //I/ARESTA:: id:27 (6 -> 6)     G -> G
-            {},                                       //I/ARESTA:: id:28 (6 -> 17)    G -> R
-            {},                                       //I/ARESTA:: id:29 (6 -> 18)    G -> S
-            {},                                       //I/ARESTA:: id:30 (6 -> 21)    G -> V
-            {},                                       //I/ARESTA:: id:31 (6 -> 23)    G -> G4
-            {},                                       //I/ARESTA:: id:32 (7 -> 2)     H -> C
-            {},                                       //I/ARESTA:: id:33 (7 -> 7)     H -> H
-            {},                                       //I/ARESTA:: id:34 (7 -> 15)    H -> P
-            {},                                       //I/ARESTA:: id:35 (8 -> 4)     I -> E
-            {},                                       //I/ARESTA:: id:36 (8 -> 8)     I -> I
-            {},                                       //I/ARESTA:: id:37 (8 -> 9)     I -> J
-            {},                                       //I/ARESTA:: id:38 (8 -> 16)    I -> Q
-            {},                                       //I/ARESTA:: id:39 (9 -> 8)     J -> I
-            {},                                       //I/ARESTA:: id:40 (9 -> 9)     J -> J
-            {},                                       //I/ARESTA:: id:41 (10 -> 10)   K -> K
-            {},                                       //I/ARESTA:: id:42 (10 -> 14)   K -> O
-            {},                                       //I/ARESTA:: id:43 (10 -> 22)   K -> W
-            {},                                       //I/ARESTA:: id:44 (11 -> 5)    L -> F
-            {},                                       //I/ARESTA:: id:45 (11 -> 11)   L -> L
-            {},                                       //I/ARESTA:: id:46 (11 -> 13)   L -> N
-            {},                                       //I/ARESTA:: id:47 (11 -> 19)   L -> T
-            {},                                       //I/ARESTA:: id:48 (11 -> 22)   L -> W
-            {},                                       //I/ARESTA:: id:49 (12 -> 12)   M -> M
-            {},                                       //I/ARESTA:: id:50 (12 -> 21)   M -> V
-            {},                                       //I/ARESTA:: id:51 (13 -> 5)    N -> F
-            {},                                       //I/ARESTA:: id:52 (13 -> 11)   N -> L
-            {},                                       //I/ARESTA:: id:53 (13 -> 13)   N -> N
-            {},                                       //I/ARESTA:: id:54 (13 -> 14)   N -> O
-            {},                                       //I/ARESTA:: id:55 (13 -> 19)   N -> T
-            {},                                       //I/ARESTA:: id:56 (14 -> 10)   O -> K
-            {},                                       //I/ARESTA:: id:57 (14 -> 13)   O -> N
-            {},                                       //I/ARESTA:: id:58 (14 -> 14)   O -> O
-            {{258,375}},                                       //I/ARESTA:: id:59 (15 -> 0)    P -> A
-            {{258,409}},                                       //I/ARESTA:: id:60 (15 -> 1)    P -> B
-            {{258,370}},                                       //I/ARESTA:: id:61 (15 -> 2)    P -> C
-            {},                                       //I/ARESTA:: id:62 (15 -> 4)    P -> E
-            {},                                       //I/ARESTA:: id:63 (15 -> 7)    P -> H
-            {},                                       //I/ARESTA:: id:64 (15 -> 15)   P -> P
-            {},                                       //I/ARESTA:: id:65 (15 -> 20)   P -> U
-            {},                                       //I/ARESTA:: id:66 (16 -> 4)    Q -> E
-            {},                                       //I/ARESTA:: id:67 (16 -> 8)    Q -> I
-            {},                                       //I/ARESTA:: id:68 (16 -> 16)   Q -> Q
-            {},                                       //I/ARESTA:: id:69 (16 -> 19)   Q -> T
-            {},                                       //I/ARESTA:: id:70 (16 -> 20)   Q -> U
-            {{342,495}, {342,441}, {300,441}},        //I/ARESTA:: id:71 (17 -> 0)    R -> A
-            {},                                       //I/ARESTA:: id:72 (17 -> 6)    R -> G
-            {},                                       //I/ARESTA:: id:73 (17 -> 17)   R -> R
-            {},                                       //I/ARESTA:: id:74 (17 -> 20)   R -> U
-            {},                                       //I/ARESTA:: id:75 (17 -> 21)   R -> V
-            {},                                       //I/ARESTA:: id:76 (18 -> 18)   S -> S
-            {{419,521},{419,441},{300,441}},          //I/ARESTA:: id:77 (19 -> 0)    T -> A
-            {},                                       //I/ARESTA:: id:78 (19 -> 5)    T -> F
-            {},                                       //I/ARESTA:: id:79 (19 -> 11)   T -> L
-            {},                                       //I/ARESTA:: id:80 (19 -> 13)   T -> N
-            {},                                       //I/ARESTA:: id:81 (19 -> 16)   T -> Q
-            {},                                       //I/ARESTA:: id:82 (19 -> 17)   T -> R
-            {},                                       //I/ARESTA:: id:83 (19 -> 19)   T -> T
-            {},                                       //I/ARESTA:: id:84 (20 -> 0)    U -> A
-            {},                                       //I/ARESTA:: id:85 (20 -> 4)    U -> E
-            {},                                       //I/ARESTA:: id:86 (20 -> 15)   U -> P
-            {},                                       //I/ARESTA:: id:87 (20 -> 16)   U -> Q
-            {},                                       //I/ARESTA:: id:88 (20 -> 20)   U -> U
-            {},                                       //I/ARESTA:: id:89 (21 -> 0)    V -> A
-            {},                                       //I/ARESTA:: id:90 (21 -> 6)    V -> G
-            {{258,501},{240,496}},                                       //I/ARESTA:: id:91 (21 -> 12)   V -> M
-            {},                                       //I/ARESTA:: id:92 (21 -> 17)   V -> R
-            {},                                       //I/ARESTA:: id:93 (21 -> 21)   V -> V
-            {},                                       //I/ARESTA:: id:94 (22 -> 10)   W -> K
-            {},                                       //I/ARESTA:: id:95 (22 -> 11)   W -> L
-            {},                                       //I/ARESTA:: id:96 (22 -> 22)   W -> W
-            {},                                       //I/ARESTA:: id:97 (23 -> 6)    G4-> G
-            {}                                        //I/ARESTA:: id:98 (23 -> 23)   G4-> G4
+        {},                                                                               //id:0  (Bloco A -> Bloco B)
+        {{619,794}},                                                                      //id:1  (Bloco A -> Bloco D)
+        {{605,707}, {605,607},{664,607},{670,508}},                                       //id:2  (Bloco A -> Bloco E)
+        {{587,877},{812,877},{812,1124}},                                                 //id:3  (Bloco A -> Bloco F)
+        {{587,877},{812,877},{812,1124}},                                                 //id:4  (Bloco A -> Bloco G)
+        {{587,877},{659,877}},                                                            //id:5  (Bloco A -> Bloco R)
+        {{587,877},{812,877},{812,1044}},                                                 //id:6  (Bloco A -> Bloco T)
+        {{605,707}, {605,607},{664,607}},                                                 //id:7  (Bloco A -> Quadra de esportes)
+        {{587,877},{659,877},{659,963}, {584,963},{568,969},{557,980}},                   //id:8  (Bloco A -> Jardim)
+        {{438,810}},                                                                      //id:9  (Bloco B -> Bloco C)
+        {},                                                                               //id:10 (Bloco B -> Estacionamento professores)
+        {},                                                                               //id:11 (Bloco C -> Capela)
+        {},                                                                               //id:12 (Bloco C -> Estacionamento professores)
+        {{812,508}},                                                                      //id:13 (Bloco E -> Bloco F)
+        {{812,508},{812,1124}},                                                           //id:14 (Bloco E -> Bloco G)
+        {{447,508}},                                                                      //id:15 (Bloco E -> Capela)
+        {{447,508},{447,492},{483,492},{493,442}},                                        //id:16 (Bloco E -> Bloco I)
+        {{812,508},{812,877},{658,877}},                                                  //id:17 (Bloco E -> Bloco R)
+        {{812,508},{812,1044}},                                                           //id:18 (Bloco E -> Bloco T)
+        {{670,508},{664,607}},                                                            //id:19 (Bloco E -> Quadra de esportes)
+        {{863,1214}},                                                                     //id:20 (Bloco F -> Bloco L)
+        {{863,1214},{863,1172}},                                                          //id:21 (Bloco F -> Bloco N)
+        {{812,877},{659,877}},                                                            //id:22 (Bloco F -> Bloco R)
+        {{812,1176}},                                                                     //id:23 (Bloco F -> Estacionamento estudantes)
+        {{812,1044}},                                                                     //id:24 (Bloco F -> Bloco T)
+        {{572,1086},{472,1086},{472,1066},{483,1047},{484,1021},{480,1005},{468,996}},    //id:25 (Bloco G -> Biblioteca)
+        {{572,1086}, {663,1052}},                                                         //id:26 (Bloco G -> Bloco R)
+        {},                                                                               //id:27 (Bloco G -> Estacionamento estudantes)
+        {{812,1124},{812,1044}},                                                          //id:28 (Bloco G -> Bloco T)
+        {{572,1086}, {522,1086},{522,1066},{543,1011}},                                   //id:29 (Bloco G -> Jardim)
+        {},                                                                               //id:30 (Bloco G -> Bloco G4)
+        {{447,508},{447,492},{483,492},{493,442}},                                        //id:31 (Capela -> Bloco I)
+        {},                                                                               //id:32 (Capela -> Estacionamento professores)
+        {{902,442},{884,271}},                                                            //id:33 (Bloco I -> Bloco J)
+        {{863,1354}},                                                                     //id:34 (Bloco K -> Bloco L)
+        {{1143,1354},{1135,1172}},                                                        //id:35 (Bloco K -> Bloco O)
+        {{1016,1354}},                                                                    //id:36 (Bloco K -> Bloco W)
+        {{863,1172}},                                                                     //id:37 (Bloco L -> Bloco N)
+        {{863,1354},{1016,1354}},                                                         //id:38 (Bloco L -> Bloco W)
+        {{466,989},{480,993},{486,992},{501,999},{522,1003}},                             //id:39 (Biblioteca -> Jardim)
+        {},                                                                               //id:40 (Bloco N -> Bloco O)
+        {{863,1172}},                                                                     //id:41 (Bloco N -> Bloco T)
+        {{575,607},{664,607}},                                                            //id:42 (Estacionamento professores -> Quadra de esportes)
+        {{721,636}},                                                                      //id:43 (Bloco Q -> Quadra de esportes)
+        {{659,877},{812,877},{812,1044}},                                                 //id:44 (Bloco R -> Bloco T)
+        {{659,963},{584,963},{568,969},{557,980}},                                        //id:45 (Bloco R -> Jardim)
+        {{812,1176}, {812,1044}}                                                          //id:46 (Estacionamento estudantes -> Bloco T)
+    };
+
+    private static int[] custos = {
+       11,     //id:0  (Bloco A -> Bloco B)
+       30,     //id:1  (Bloco A -> Bloco D)
+       124,    //id:2  (Bloco A -> Bloco E)
+       380,    //id:3  (Bloco A -> Bloco F)
+       270,    //id:4  (Bloco A -> Bloco G)
+       92,     //id:5  (Bloco A -> Bloco R)
+       190,    //id:6  (Bloco A -> Bloco T)
+       94,     //id:7  (Bloco A -> Quadra de esportes)
+       117,    //id:8  (Bloco A -> Jardim)
+       68,     //id:9  (Bloco B -> Bloco C)
+       34,     //id:10 (Bloco B -> Estacionamento professores)
+       29,     //id:11 (Bloco C -> Capela)
+       28,     //id:12 (Bloco C -> Estacionamento professores)
+       256,    //id:13 (Bloco E -> Bloco F)
+       316,    //id:14 (Bloco E -> Bloco G)
+       126,    //id:15 (Bloco E -> Capela)
+       192,    //id:16 (Bloco E -> Bloco I)
+       250,    //id:17 (Bloco E -> Bloco R)
+       225,    //id:18 (Bloco E -> Bloco T)
+       64,     //id:19 (Bloco E -> Quadra de esportes)
+       36,     //id:20 (Bloco F -> Bloco L)
+       65,     //id:21 (Bloco F -> Bloco N)
+       197,    //id:22 (Bloco F -> Bloco R)
+       93,     //id:23 (Bloco F -> Estacionamento estudantes)
+       47,     //id:24 (Bloco F -> Bloco T)
+       72,     //id:25 (Bloco G -> Biblioteca)
+       40,     //id:26 (Bloco G -> Bloco R)
+       12,     //id:27 (Bloco G -> Estacionamento estudantes)
+       104,    //id:28 (Bloco G -> Bloco T)
+       60,     //id:29 (Bloco G -> Jardim)
+       68,     //id:30 (Bloco G -> Bloco G4)
+       128,    //id:31 (Capela -> Bloco I)
+       35,     //id:32 (Capela -> Estacionamento professores)
+       95,     //id:33 (Bloco I -> Bloco J)
+       98,     //id:34 (Bloco K -> Bloco L)
+       50,     //id:35 (Bloco K -> Bloco O)
+       32,     //id:36 (Bloco K -> Bloco W)
+       84,     //id:37 (Bloco L -> Bloco N)
+       84,     //id:38 (Bloco L -> Bloco W)
+       23,     //id:39 (Biblioteca -> Jardim)
+       29,     //id:40 (Bloco N -> Bloco O)
+       70,     //id:41 (Bloco N -> Bloco T)
+       80,     //id:42 (Estacionamento professores -> Quadra de esportes)
+       22,     //id:43 (Bloco Q -> Quadra de esportes)
+       168,    //id:44 (Bloco R -> Bloco T)
+       50,     //id:45 (Bloco R -> Jardim)
+       115     //id:46 (Estacionamento estudantes -> Bloco T)
     };
 
 
-    public static int[][] getCoordenadasVertices() {
+
+    static int[][] getCoordenadasVertices() {
         return coordenadasVertices;
     }
 
@@ -210,8 +175,12 @@ public class Dados {
     }
 
 
-    public static int[][][] getCoordenadasComplementares() {
+    static int[][][] getCoordenadasComplementares() {
         return coordenadasComplementares;
+    }
+
+    static int[] getCustos() {
+        return custos;
     }
 }
 
