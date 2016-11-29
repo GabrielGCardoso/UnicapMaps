@@ -6,7 +6,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
@@ -19,7 +18,7 @@ import unicap.grafos.unicapmaps.model.Rota;
  * Created by cais on 19/11/16.
  */
 
-public class BuscaDinamica implements TextWatcher {
+public class PesquisaDinamica implements TextWatcher {
 
     private String stringInput;
     private Context context;
@@ -33,7 +32,7 @@ public class BuscaDinamica implements TextWatcher {
     private PesquisaBlocos buscador;
 
 
-    public BuscaDinamica(Context context, ListView listView, EditText source, Rota rota, int alvo) {
+    public PesquisaDinamica(Context context, ListView listView, EditText source, Rota rota, int alvo) {
         this.context = context;
         this.listView = listView;
         this.editTextSource = source;
@@ -60,7 +59,7 @@ public class BuscaDinamica implements TextWatcher {
 
     @Override
     public void afterTextChanged(Editable s) {
-        if(!stringInput.isEmpty() && editTextSource.hasFocus()){
+        if(stringInput != null && editTextSource.hasFocus() && !stringInput.isEmpty()){
             buscador = new PesquisaBlocos();
             resultado = buscador.pesquisaInfo(stringInput);
             //resultado = criarResultadosFalsos();
@@ -74,20 +73,6 @@ public class BuscaDinamica implements TextWatcher {
         } else{
             resetListView();
         }
-    }
-
-    private ArrayList<ResultadoPesquisa> criarResultadosFalsos() {
-        ArrayList<ResultadoPesquisa> result = new ArrayList();
-        int id;
-        for(int i = 0; i < 20; i++){
-            id = (int) (Math.random() * 24);
-            if(i%2 == 0) {
-                result.add(new ResultadoPesquisa(id, "Bloco " + id, "descrição " + id));
-            }else{
-                result.add(new ResultadoPesquisa(id, "Bloco " + id));
-            }
-        }
-        return result;
     }
 
     private void resetListView() {

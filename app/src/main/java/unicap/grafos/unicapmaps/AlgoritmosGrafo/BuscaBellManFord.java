@@ -24,7 +24,6 @@ public class BuscaBellManFord implements InterfaceBuscaEmGrafo {
     public BuscaBellManFord(GrafoController controller){
         this.controller = controller;
         grafo = Grafo.getInstance();
-
     }
 
     @Override
@@ -32,11 +31,18 @@ public class BuscaBellManFord implements InterfaceBuscaEmGrafo {
         this.chegada = chegada;
         int i;
         ArrayList<Aresta> arestas = grafo.getArestas();
-        iniciar(partida);
+        ArrayList<Vertice> caminho;
+        custos = new ArrayList();
+        anteriores = new ArrayList();
+        UtilBuscas.inicializar(anteriores, custos);
+        custos.set(partida.getId(), 0);
+        tamanho = grafo.countVertices();
 
         for(i = 1; i < tamanho - 1; i++){
             for (Aresta aresta: arestas){
-                    relaxarAresta(aresta.getA(), aresta.getB(), aresta.getCusto());
+                if(UtilBuscas.relaxarAresta(custos, aresta.getA(), aresta.getB(), aresta.getCusto())){
+                    anteriores.set(aresta.getB().getId(), aresta.getA());
+                }
             }
         }
         for(Aresta aresta: arestas){
@@ -44,47 +50,8 @@ public class BuscaBellManFord implements InterfaceBuscaEmGrafo {
                 return null; //erro;
             }
         }
-        return recuperarCaminho();
-    }
-
-    private ArrayList<Aresta> recuperarCaminho() {
-        ArrayList<Vertice> caminho = new ArrayList<>();
-
-        Vertice anterior = chegada;
-        do {
-            caminho.add(0, anterior);
-            anterior = anteriores.get(anterior.getId());
-        }while(anterior != null);
-
+        caminho = UtilBuscas.varrerAnteriores(anteriores, partida, chegada);
         return controller.getArestasFromVertices(caminho);
     }
 
-    private void relaxarAresta(Vertice A, Vertice B, int custo) {
-        int idA, idB, novoCusto;
-        idA = A.getId();
-        idB = B.getId();
-        if(custos.get(idA) == Integer.MAX_VALUE){
-            novoCusto = custos.get(idA);
-        } else{
-            novoCusto = custos.get(idA) + custo;
-        }
-        if(novoCusto < custos.get(idB)){
-            custos.set(idB, novoCusto);
-            anteriores.set(idB, A);
-        }
-    }
-
-    private void iniciar(Vertice partida) {
-        tamanho = grafo.countVertices();
-
-        custos = new ArrayList();
-        anteriores = new ArrayList();
-
-        int i;
-        for(i = 0; i < tamanho; i++){
-            custos.add(Integer.MAX_VALUE);
-            anteriores.add(null);
-        }
-        custos.set(partida.getId(), 0);
-    }
 }

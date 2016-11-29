@@ -1,5 +1,4 @@
 package unicap.grafos.unicapmaps.dao;
-
 import java.util.ArrayList;
 
 /**
@@ -26,7 +25,7 @@ public class InfoBlocos {
         infoBlocos.add(M);      //12 M = Biblioteca
         infoBlocos.add(N);      //13 N
         infoBlocos.add(O);      //14 O
-        infoBlocos.add(P);      //15 P = Estacionamento professores
+        infoBlocos.add(P);      //15 P = Estacionamento funcionários
         infoBlocos.add(Q);      //16 Q
         infoBlocos.add(R);      //17 R
         infoBlocos.add(S);      //18 S = Estacionamento estudantes
@@ -53,7 +52,7 @@ public class InfoBlocos {
             "Biblioteca",
             "Bloco N",
             "Bloco O",
-            "Estacionamento professores",
+            "Estacionamento funcionários",
             "Bloco Q",
             "Bloco R",
             "Estacionamento estudantes",
@@ -181,7 +180,7 @@ public class InfoBlocos {
         "COAVE - Comissão para Aplicação do Vestibular"
     };
 
-    private String[] F = {};
+    private String[] F = {"Oficinas"};
 
     private String[] G = {
             "Sala 001 - Laboratório de Tratamento de Imagens do curso de Fotografia",
@@ -212,21 +211,27 @@ public class InfoBlocos {
             "Administração"
     };
 
-    private String[] J = {};
+    private String[] J = {
+            "Medicina",
+            "NPCIAMB"
+    };
 
-    private String[] K = {};
+    private String[] K = {"DCE"};
 
-    private String[] L = {};
+    private String[] L = {"Astepi"};
 
     private String[] M = {};
 
-    private String[] N = {};
+    private String[] N = {"Unicap Jr."};
 
-    private String[] O = {};
+    private String[] O = {"Forum"};
 
     private String[] P = {};
 
-    private String[] Q = {};
+    private String[] Q = {
+            "Serventes",
+            "Quadra A"
+    };
 
     private String[] R = {
         "Salas 005, 009 - SERDAE (Setor de Processamento de Dados)",
@@ -252,13 +257,17 @@ public class InfoBlocos {
 
     private String[] S = {};
 
-    private String[] T = {};
+    private String[] T = {
+            "SEAR/SEPAT (escritório tecnico/patrimônio)"
+    };
 
     private String[] U = {};
 
     private String[] V = {};
 
-    private String[] W = {};
+    private String[] W = {
+            "Clínica Corpore Sano (Lab. de Fisioterapia e Terapia Ocupacional)"
+    };
 
     private String[] G4 = {
             "Sala 001 - Laboratório de Áudio e Vídeo do curso de Publicidade, que é ligado ao CCS",

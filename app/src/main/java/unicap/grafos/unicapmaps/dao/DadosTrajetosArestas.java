@@ -12,10 +12,6 @@ public class DadosTrajetosArestas{
 
     private static ArrayList<Trajeto> trajetos;
 
-    public DadosTrajetosArestas(){
-
-    }
-
     public static void criarTrajetos(){
         trajetos = new ArrayList<>();
         trajetos.add(new Trajeto( 0,  1, A_B));
@@ -119,98 +115,465 @@ public class DadosTrajetosArestas{
         return trajetos;
     }
 
-    private static String[] A_B = {};
-    private static String[] B_A = {};
-    private static String[] A_D = {};
-    private static String[] D_A = {};
-    private static String[] A_E = {};
-    private static String[] E_A = {};
-    private static String[] A_F = {};
-    private static String[] F_A = {};
-    private static String[] A_G = {};
-    private static String[] G_A = {};
-    private static String[] A_R = {};
-    private static String[] R_A = {};
-    private static String[] A_T = {};
-    private static String[] T_A = {};
-    private static String[] A_U = {};
-    private static String[] U_A = {};
-    private static String[] A_V = {};
-    private static String[] V_A = {};
-    private static String[] B_C = {};
-    private static String[] C_B = {};
-    private static String[] B_P = {};
-    private static String[] P_B = {};
-    private static String[] C_H = {};
-    private static String[] H_C = {};
-    private static String[] C_P = {};
-    private static String[] P_C = {};
-    private static String[] E_F = {};
-    private static String[] F_E = {};
-    private static String[] E_G = {};
-    private static String[] G_E = {};
-    private static String[] E_H = {};
-    private static String[] H_E = {};
-    private static String[] E_I = {};
-    private static String[] I_E = {};
-    private static String[] E_R = {};
-    private static String[] R_E = {};
-    private static String[] E_T = {};
-    private static String[] T_E = {};
-    private static String[] E_U = {};
-    private static String[] U_E = {};
-    private static String[] F_L = {};
-    private static String[] L_F = {};
-    private static String[] F_N = {};
-    private static String[] N_F = {};
-    private static String[] F_R = {};
-    private static String[] R_F = {};
-    private static String[] F_S = {};
-    private static String[] S_F = {};
-    private static String[] F_T = {};
-    private static String[] T_F = {};
-    private static String[] G_M = {};
-    private static String[] M_G = {};
-    private static String[] G_R = {};
-    private static String[] R_G = {};
-    private static String[] G_S = {};
-    private static String[] S_G = {};
-    private static String[] G_T = {};
-    private static String[] T_G = {};
-    private static String[] G_V = {};
-    private static String[] V_G = {};
-    private static String[] G_G4 = {};
-    private static String[] G4_G = {};
-    private static String[] H_I = {};
-    private static String[] I_H = {};
-    private static String[] H_P = {};
-    private static String[] P_H = {};
-    private static String[] I_J = {};
-    private static String[] J_I = {};
-    private static String[] K_L = {};
-    private static String[] L_K = {};
-    private static String[] K_O = {};
-    private static String[] O_K = {};
-    private static String[] K_W = {};
-    private static String[] W_K = {};
-    private static String[] L_N = {};
-    private static String[] N_L = {};
-    private static String[] L_W = {};
-    private static String[] W_L = {};
-    private static String[] M_V = {};
-    private static String[] V_M = {};
-    private static String[] N_O = {};
-    private static String[] O_N = {};
-    private static String[] N_T = {};
-    private static String[] T_N = {};
-    private static String[] P_U = {};
-    private static String[] U_P = {};
-    private static String[] Q_U = {};
-    private static String[] U_Q = {};
-    private static String[] R_T = {};
-    private static String[] T_R = {};
-    private static String[] R_V = {};
-    private static String[] V_R = {};
-    private static String[] S_T = {};
-    private static String[] T_S = {};
+    private static String[] A_B = {"Siga em direção ao Bloco B."};
+    private static String[] B_A = {"Siga em direção ao Bloco A."};
+    private static String[] A_D = {"Siga em direção ao Bloco D."};
+    private static String[] D_A = {"Siga em direção ao Bloco A."};
+    private static String[] A_E = {
+            "Siga pelo corredor do Bloco A.",
+            "Vire à direita ao sair do Bloco A.",
+            "Ande até até a calçada e vire à esquerda.",
+            "Vire à direita em direção ao Bloco E."
+    };
+    private static String[] E_A = {
+            "Siga pela calçada e vire à esquerda.",
+            "Siga pela calçada e vira à direta.",
+            "Vire à esquerda no corredor e siga em direção ao Bloco A."
+    };
+    private static String[] A_F = {
+            "Siga em direção à Rua do Lazer",
+            "Vire à esquerda na Rua do Lazer",
+            "Ao chegar na rua Afonso Pena, vire à direita.",
+            "Siga em frente até chegar na rua Almeida Cunha.",
+            "Siga em direção ao Bloco F."
+    };
+    private static String[] F_A = {
+            "Siga pela rua Afonso Pena e atravesse a rua Almeida Cunha.",
+            "Siga em frente até chegar na Rua do Lazer.",
+            "Vire a esquerda na Rua do Lazer.",
+            "Vire à direita em direção ao Bloco A."
+    };
+    private static String[] A_G = {
+            "Siga em direção à Rua do Lazer",
+            "Vire à esquerda na Rua do Lazer",
+            "Ao chegar na rua Afonso Pena, vire à direita.",
+            "Siga em frente até chegar na rua Almeida Cunha.",
+            "Vire à direita em direção ao Bloco G."
+    };
+    private static String[] G_A = {
+            "Siga em direção à rua Afonso Pena.",
+            "Vire à esquerda e siga até a rua do Lazer.",
+            "Siga pela rua do Lazer.",
+            "Vire à direita em direção ao Bloco A."
+    };
+    // BLOCO R = 17
+    private static String[] A_R = {
+            "Siga em direção á Rua do Lazer.",
+            "Vire à esquerda na Rua do Lazer.",
+            "Vire à direita em direção ao Bloco R."
+    };
+    private static String[] R_A = {
+            "Siga em direção à Rua do Lazer.",
+            "Vire à esquerda na Rua do Lazer.",
+            "Vire à direita em direção ao Bloco A."
+    };
+    private static String[] A_T = {
+            "Siga em direção à Rua do Lazer.",
+            "Vire à esquerda na Rua do Lazer.",
+            "Na rua Afonso Pena, vire à direita.",
+            "Siga pela rua Afonso Pena.",
+            "Vire à esquerda em direção ao Bloco T"
+    };
+    private static String[] T_A = {
+            "Atravesse a rua Afonso Pena",
+            "Vire à direita em direção à rua do Lazer.",
+            "Vire à esquerda na Rua do Lazer.",
+            "Siga pela rua do lazer.",
+            "Vire à direita em direção ao Bloco A."
+    };
+    private static String[] A_U = {
+            "Siga pelo corredor do Bloco A.",
+            "Vire à direita ao sair do Bloco A.",
+            "Ande até até a calçada e vire à direita.",
+            "Siga em direção ao à Quadra de esportes."
+    };
+    private static String[] U_A = {
+            "Siga pela calçada e vire à esquerda.",
+            "Vire à esquerda no corredor.",
+            "Siga em direção ao Bloco A."
+    };
+    // 21
+    private static String[] A_V = {
+            "Siga em direção à Rua do Lazer.",
+            "Vire à esquerda na Rua do Lazer.",
+            "Vire à direita em direção ao corredor",
+            "Vire à direita no caminho em direção ao Jardim"
+    };
+    private static String[] V_A = {
+            "Siga pelo caminho em direção ao corredor.",
+            "Vire à esquerda no corredor.",
+            "Vire à esquerda na Rua do Lazer.",
+            "Vire à direita em direção do Bloco A"
+    };
+    private static String[] B_C = {
+            "Siga pelo corredor do bloco B.",
+            "Vire à direita em direção ao Bloco C."
+    };
+    private static String[] C_B = {
+            "Siga em direção ao corredor do Bloco B.",
+            "Vire à direita em direção ao BLoco B."
+    };
+    private static String[] B_P = {"Siga em direção ao Estacionamento dos Funcionários."};
+    private static String[] P_B = {"Siga em direção ao Bloco B."};
+    private static String[] C_H = {"Siga em direção à Capela."};
+    private static String[] H_C = {"Siga em direção ao Bloco C."};
+    private static String[] C_P = {"Siga em direção ao Estacionamento dos Funcionários."};
+    private static String[] P_C = {"Siga em direção ao Bloco C."};
+    // 4 -> 5
+    private static String[] E_F = {
+            "Siga em direção à rua Afonso Pena.",
+            "Vire à direita na rua Afonso Pena.",
+            "Siga pela rua Afonso Pena.",
+            "Atravesse a rua Bernando Guimarães.",
+            "Continue pela rua Afonso Pena.",
+            "Atravesse a rua Almeida Cunha",
+            "Siga em direção ao Bloco F."
+    };
+    // 5-> 4
+    private static String[] F_E = {
+            "Siga pela rua Afonso Pena.",
+            "Atravesse à rua Almeida Cunha.",
+            "Continue pela rua Afonso Pena.",
+            "Atravesse à rua Bernardo Guimarães.",
+            "Vire à esquerda em direção ao Bloco E."
+    };
+    //4->6
+    private static String[] E_G = {
+            "Siga em direção à rua Afonso Pena.",
+            "Vire à direita na rua Afonso Pena.",
+            "Siga pela rua Afonso Pena.",
+            "Atravesse a rua Bernando Guimarães.",
+            "Continue pela rua Afonso Pena.",
+            "Atravesse à esquerda na rua Almeida Cunha",
+            "Siga em direção ao Bloco G."
+    };
+    //6->4
+    private static String[] G_E = {
+            "Siga pela rua Almeida Cunha em direção à rua Afonso Pena.",
+            "Vire à equerda na rua Almeida Cunha.",
+            "Siga pela rua Almeida Cunha.",
+            "Atravesse a rua Bernardo Guimarães.",
+            "Siga pela rua Almeida Cunha.",
+            "Vire à esquerda em direção ao Bloco E."
+    };
+    // 4 -> 7
+    private static String[] E_H = {
+            "Siga em direção ao portão.",
+            "Vire à esquerda em direção à Capela.",
+    };
+    // 7 -> 4
+    private static String[] H_E = {
+            "Siga em direção ao portão.",
+            "Vire à direita em direção ao Bloco E."
+    };
+    //4->8
+    private static String[] E_I = {
+            "Siga em direção ao portão.",
+            "Vire a direita em direção à rua do Príncipe.",
+            "Atravesse a rua do Príncipe pela faixa de pedestres.",
+            "Vire à direita em direção ao Bloco I."
+    };
+    //8->4
+    private static String[] I_E = {
+            "Siga em direção à faixa de pedestres da rua do Príncipe.",
+            "Atravesse a rua do Príncipe pela faixa de pedestres.",
+            "Vire à direita em direção ao portão.",
+            "Vire à esquerda duas vezes em direção ao Bloco E."
+    };
+    //4->17
+    private static String[] E_R = {
+            "Siga em direção à rua Afonso Pena.",
+            "Vire à direita na rua Afonso Pena.",
+            "Siga até a rua do lazer.",
+            "Vire à direita na rua do lazer.",
+            "Siga pela rua do lazer até o primeiro portão.",
+            "Vire à esquerda em direção ao Bloco R."
+    };
+    //17->4
+    private static String[] R_E = {
+            "Siga em direção à Rua do Lazer.",
+            "Vire à direita na Rua do Lazer.",
+            "Vire à esquerda na rua Afonso Pena.",
+            "Siga pela rua Afonso Pena até o portão.",
+            "Vire à esquerda em direção ao Bloco E"
+    };
+    //4->19
+    private static String[] E_T = {
+            "Siga em direção à rua Afonso Pena.",
+            "Vire à direita na rua Afonso Pena.",
+            "Atravesse a rua Bernardo Guimarães",
+            "Siga pela rua Afonso Pena.",
+            "Vire à esquerda em direção ao Bloco T."
+    };
+    //19->4
+    private static String[] T_E = {
+            "Atravesse a rua Afonso Pena.",
+            "Vire à direita em direção à Rua do Príncipe.",
+            "No portão, vire à esquerda em direção ao Bloco E."
+    };
+    //4->20
+    private static String[] E_U = {
+            "Siga pela calçada até o final do Bloco E.",
+            "Vire à esquerda em direção à Quadra de esportes."
+    };
+    //20->4
+    private static String[] U_E = {
+            "Siga em direção à rua do Príncipe.",
+            "Vire à direita em direção ao Bloco E"
+    };
+    //5->11
+    private static String[] F_L = {
+            "Atravesse a rua Afonso Pena.",
+            "Vire à direita em direção ao Bloco L",
+    };
+    //11->5
+    private static String[] L_F = {
+            "Siga pela Afonso Pena em direção à rua Almeida Cunha.",
+            "Vire à esquerda em direção ao Bloco F."
+    };
+    //5->13
+    private static String[] F_N = {
+            "Atravesse a rua Afonso Pena.",
+            "Vire à esquerda em direção à rua Almeida Cunha.",
+            "Vire à direita em direção ao Bloco N."
+    };
+    //13->5
+    private static String[] N_F = {
+            "Siga em direção a rua Afonso Pena.",
+            "Vire à esquerda e direção à rua Eduardo de Carvalho.",
+            "Vire à esquerda, e atravesse à rua Afonso Pena em direção ao Bloco F.",
+    };
+    //5->17
+    private static String[] F_R = {
+            "Siga pela rua Afonso Pena em direção à rua do lazer.",
+            "Vire à esquerda na rua do lazer.",
+            "Siga pela rua do lazer até o primeiro portão.",
+            "Vire à esquerda em direção ao Bloco R."
+    };
+    //17->5
+    private static String[] R_F = {
+            "Siga pelo corredor em direção à rua do lazer.",
+            "Vire à direita na rua do lazer.",
+            "Vire à direita na rua Afonso Pena.",
+            "Siga pela rua Afonso Pena e atravesse a rua Almeida Cunha.",
+            "Siga em direção ao Bloco F"
+    };
+    //5->18
+    private static String[] F_S = {
+            "Siga em frente em direção à rua Almeida Cunha.",
+            "Vire à esquerda na rua Almeida Cunha",
+            "Siga em direção ao Estacionamento dos estudantes"
+    };
+    //18->5
+    private static String[] S_F = {
+            "Siga pela rua Almeida Cunha em direção à rua Afonso Pena.",
+            "Vire à direita em direção ao Bloco F."
+    };
+    //5->19
+    private static String[] F_T = {
+            "Siga pela rua Afonso Pena e atravesse a rua Almeida Cunha.",
+            "Siga em frente em direção à rua Bernardo Guimarães.",
+            "Vire à direita e atravesse a rua Afonso Pena em direção ao Bloco T.",
+    };
+    //19->5
+    private static String[] T_F = {
+            "Atravesse a rua Afonso Pena.",
+            "Vire à esquerda na rua Afonso Pena.",
+            "Siga em frente e atravesse à rua Almeida Cunha.",
+            "Siga em direção ao Bloco F."
+    };
+    //6->12
+    private static String[] G_M = {
+            "Vire à esquerda no corredor do Bloco G",
+            "Vire à direita na segunda entrada do Jardim",
+            "Siga pelo caminho do Jardim",
+            "Vire levemente à esquerda em direção à Biblioteca."
+    };
+    //12->6
+    private static String[] M_G = {
+            "Vire levemente à direita pelo caminho do Jardim.",
+            "Siga até o corredor do Bloco G.",
+            "Siga pelo corredor do Bloco G.",
+            "Vire à direita em direção à entrada do Bloco G."
+    };
+    //6->17
+    private static String[] G_R = {
+            "Vire levemente à direita seguindo em direção ao Bloco R.",
+            "Vire levemente à esquerda em direção ao Bloco R."
+    };
+    //17->6
+    private static String[] R_G = {
+            "Siga em direção ao Bloco G.",
+            "Vire levemente à direita em direção ao Bloco G.",
+    };
+    //6->18
+    private static String[] G_S = {"Atravesse a rua Almeida Cunha em direção ao Estacionamento dos estudantes."};
+    //18->6
+    private static String[] S_G = {"Atravesse a rua Almeida Cunha em direção ao Bloco G."};
+    //6->19
+    private static String[] G_T = {
+            "Siga pela rua Almeida Cunha em direção à rua Afonso Pena.",
+            "Vire à esquerda na rua Afonso Pena.",
+            "Siga em frente em direção a rua Bernardo Guimarães.",
+            "Vire à direita e atravesse a rua em direção ao Bloco T"
+    };
+    //19->6
+    private static String[] T_G = {
+            "Atravesse a rua Afonso Pena.",
+            "Vire à esquerda em direção a rua Almeida Cunha.",
+            "Vire à direita em direção ao Bloco G.",
+    };
+    //6->21
+    private static String[] G_V = {
+            "Vire à esquerda no corredor do Bloco G.",
+            "Vire à direita na primeira entrada do Jardim.",
+            "Siga pelo caminho em direção ao Jardim."
+    };
+    //21->6
+    private static String[] V_G = {
+            "Siga pelo caminho em direção ao corredor do Bloco G.",
+            "Vire à esquerda no corredor do Bloco G.",
+            "Siga em direção à entrada do Bloco G."
+    };
+    private static String[] G_G4 = {"Siga pela calçada em direção ao Bloco G4"};
+    private static String[] G4_G = {"Siga pela calçada em direção ao Bloco G."};
+    private static String[] H_I = {
+            "Siga em direção ao portão.",
+            "Vire à direita em direção à faixa de pedestres.",
+            "Atravesse a rua do Príncipe pela faixa de pedestres.",
+            "Vire à direita em direção ao Bloco I."
+    };
+    private static String[] I_H = {
+            "Siga pela calçada até a faixa de pedestres.",
+            "Atravesse a rua pela faixa de pedestres",
+            "Vire à direita em direção ao portão",
+            "Vire à esquerda em direção à Capela"
+    };
+    private static String[] H_P = {"Siga em direção ao Estacionamento dos funcionários."};
+    private static String[] P_H = {"Siga em direção à Capela."};
+    private static String[] I_J = {
+            "Siga no sentido contràrio da rua do Príncipe.",
+            "Vire à esquerda em direção ao bloco I"
+    };
+    private static String[] J_I = {
+            "Siga em direção à rua do Príncipe.",
+            "Vire à direita em direção ao Bloco I."
+    };
+    private static String[] K_L = {
+            "Siga pela rua Eduardo de Carvalho em direção à rua Afonso Pena.",
+            "Vire à esquerda na rua Afonso Pena.",
+            "Siga em direção ao Bloco L."
+    };
+    private static String[] L_K = {
+            "Siga pela rua Afonso Pena em direção à rua Eduardo de Carvalho.",
+            "Vire à esquerda na rua Eduardo de Carvalho.",
+            "Siga em direção ao Bloco K."
+    };
+    private static String[] K_O = {
+            "Siga em direção à rua Manoel Pereira.",
+            "Vire à direita na rua Manoel Pereira.",
+            "Vire à direita na rua Eduardo de Carvalho.",
+            "Siga em direção ao Bloco K."
+    };
+    private static String[] O_K = {
+            "Siga em direção à rua Manoel Pereira.",
+            "Vire à esquerda na rua Manoel Pereira.",
+            "Vire à esquerda na rua Almeida Cunha.",
+            "Siga em direção ao Bloco O."
+    };
+    private static String[] K_W = {
+            "Siga pela rua Eduardo de Carvalho em direção à rua Afonso Pena.",
+            "Vire à direita em direção ao BLoco W."
+    };
+    private static String[] W_K = {
+            "Atravesse a rua Eduardo de Carvalho.",
+            "Vire à direita em direção ao Bloco K."
+    };
+    private static String[] L_N = {
+            "Siga pela rua Afonso Pena em direção à rua Almeida Cunha.",
+            "Vire à direita em direção ao Bloco N."
+    };
+    private static String[] N_L = {
+            "Siga pela rua Almeida Cunha em direção à rua Afonso Pena.",
+            "Vire à esquerda em direção ao Bloco L."
+    };
+    private static String[] L_W = {
+            "Siga pela rua Afonso Pena em direção à rua Eduardo de Carvalho.",
+            "Vire à esquerda na rua Eduardo de Carvalho.",
+            "Vire à direita em direção ao Bloco W."
+    };
+    private static String[] W_L = {
+            "Atravesse a rua Eduardo de Carvalho e vire à esquerda.",
+            "Siga em direção a rua Afonso pena e vire à direita.",
+            "Siga em direção ao Bloco L."
+    };
+    private static String[] M_V = {"Siga em direção ao Jardim"};
+    private static String[] V_M = {"Siga em direção à Biblioteca"};
+    private static String[] N_O = {"Siga em direção ao Bloco O."};
+    private static String[] O_N = {"Siga em direção ao Bloco N."};
+
+    private static String[] N_T = {
+            "Siga pela rua Almeida em direção à rua Afonso Pena.",
+            "Vire à direita na rua Afonso Pena.",
+            "Siga em direção ao Bloco T"
+    };
+    private static String[] T_N = {
+            "Siga pela rua Afonso Pena em direção à rua Almeida Cunha.",
+            "Atravesse a rua Almeida Cunha.",
+            "Vire à direita em direção ao Bloco N."
+    };
+    private static String[] P_U = {
+            "Siga em direção ao final do Bloco A.",
+            "Vire à direita em direção à calçada.",
+            "Vire à direita em direção à Quadra de esportes"
+    };
+    private static String[] U_P = {
+            "Siga pela calçada e vire à esquerda.",
+            "Ande até passar do prédio do Bloco A.",
+            "Vire à esquerda em direção ao Estacionamento dos funcionários"
+    };
+    private static String[] Q_U = {
+            "Siga em direção à frente da Quadra de esportes.",
+            "Vire à esquerda em direção à Quadra de esportes."
+    };
+    private static String[] U_Q = {
+            "Siga pela lateral esquerda da Quadra de esportes.",
+            "Vire à direita em direção ao Bloco.Q"
+    };
+    private static String[] R_T = {
+            "Siga pelo corredor em direção à rua do lazer.",
+            "Vire à direita na rua do lazer.",
+            "Siga em direção à rua Afonso Pena.",
+            "Vire à direita na rua Afonso Pena.",
+            "Siga pela rua Afonso Pena.",
+            "Vire à esquerda em direção ao Bloco T."
+    };
+    private static String[] T_R = {
+            "Atravesse a rua Afonso Pena e vire à direita",
+            "Siga pela rua Afonso Pena em direção à rua do lazer.",
+            "Vire à esquerda na rua do lazer.",
+            "Siga pela rua do lazer.",
+            "Vire à esquerda em direção ao Bloco R."
+    };
+    private static String[] R_V = {
+            "Siga pelo corredor em direção ao portão.",
+            "Vire à esquerda no caminho em direção ao Jardim"
+    };
+    private static String[] V_R = {
+            "Siga pelo caminho do Jardim em direção ao corredor.",
+            "Vire à direita em direção ao Bloco R."
+    };
+    private static String[] S_T = {
+            "Siga em direção à rua Afonso Pena.",
+            "Vire à esquerda e atravesse a rua Almeida Cunha.",
+            "Siga pela rua Afonso Pena.",
+            "Vire à direita em direção ao Bloco T"
+    };
+    private static String[] T_S = {
+            "Atravesse a rua Afonso Pena.",
+            "Siga em direção à rua Almeira Cunha.",
+            "Atravesse a rua Almeida Cunha.",
+            "Vire à direita em direção ao Estacionamento dos estudantes."
+    };
+
 }

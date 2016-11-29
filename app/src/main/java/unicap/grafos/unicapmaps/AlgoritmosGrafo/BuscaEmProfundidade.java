@@ -19,8 +19,6 @@ public class BuscaEmProfundidade implements InterfaceBuscaEmGrafo {
         this.controller = controller;
     }
 
-    /*Metodo para transformar o stack em arraylist aresta
-    /*Está parecido com o outro metodo se quiser pode mudar*/
 
     @Override
     public ArrayList<Aresta> buscar(Vertice partida, Vertice chegada) {
@@ -52,7 +50,7 @@ public class BuscaEmProfundidade implements InterfaceBuscaEmGrafo {
 
         while (!verticesDoCaminho.isEmpty())
         {
-            verticeProximo = getVeticeProx(verticeAtual,visitado);//pega proximo vertice
+            verticeProximo = getVerticeProximo(verticeAtual,visitado);//pega proximo vertice
             if(verticeProximo==null){
                 if(flag==false) {
                     verticeProximo = verticesDoCaminho.peek();
@@ -77,7 +75,7 @@ public class BuscaEmProfundidade implements InterfaceBuscaEmGrafo {
     }
 
     //pega proximo vertice nao visitado
-    private Vertice getVeticeProx(Vertice vAT,ArrayList<Boolean> visitados){
+    private Vertice getVerticeProximo(Vertice vAT, ArrayList<Boolean> visitados){
         int i,tam = vAT.getAdjacentes().size();
         ArrayList<Vertice> vertices=vAT.getAdjacentes();
 

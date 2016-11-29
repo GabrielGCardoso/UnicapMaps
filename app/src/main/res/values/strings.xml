@@ -6,4 +6,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="cabecalho_projeto">Universidade Católica de Pernambuco\nCurso de Ciência da Computação\nDisciplina: Grafos\nProfessor: Anthony Lins\n</string>
+    <string name="descricao_projeto">Aplicativo de localização dos Blocos da Unicap, desenvolvido na disciplina de Grafos, ministrada pelo professor Anthony Lins, do Curso de Ciência da Computação da Universidade Católica de Pernambuco.\n\nO aplicativo utiliza uma estrutura de grafo para representar as localidades no mapa.\nForam desenvolvidos diversos algoritmos utilizados em grafos.\n</string>
+    <string name="nomes_alunos">Gabriel Guimarães\nKilson Gomes\nLucas Martins\nLucas Rafael\nLuis Branco\nPaulo Bittencourt\nPaulo Surubim\nRafael Nunes\nRodrigo Cavalcanti\nUirá Veríssimo</string>
 </resources>

@@ -3,17 +3,12 @@ package unicap.grafos.unicapmaps.controller;
 
 import android.graphics.Color;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.util.Log;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
-import java.util.Stack;
 
-import unicap.grafos.unicapmaps.AlgoritmosGrafo.ColoracaoWelshPowell;
 import unicap.grafos.unicapmaps.AlgoritmosGrafo.FactoryBuscas;
 import unicap.grafos.unicapmaps.AlgoritmosGrafo.InterfaceBuscaEmGrafo;
 import unicap.grafos.unicapmaps.dao.InfoBlocos;
@@ -22,7 +17,6 @@ import unicap.grafos.unicapmaps.model.Coordenadas;
 import unicap.grafos.unicapmaps.model.Grafo;
 import unicap.grafos.unicapmaps.model.Vertice;
 import unicap.grafos.unicapmaps.view.ArestaPathView;
-import unicap.grafos.unicapmaps.view.Main;
 
 /**
  * Created by Cais Automação on 06/10/2016. project UnicapMaps

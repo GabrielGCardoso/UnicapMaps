@@ -8,17 +8,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import unicap.grafos.unicapmaps.R;
-import unicap.grafos.unicapmaps.model.Grafo;
 import unicap.grafos.unicapmaps.model.ResultadoPesquisa;
-import unicap.grafos.unicapmaps.util.Util;
 import unicap.grafos.unicapmaps.model.Rota;
+import unicap.grafos.unicapmaps.util.Util;
 
 /**
  * Created by cais on 20/11/16.

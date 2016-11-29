@@ -1,5 +1,6 @@
 package unicap.grafos.unicapmaps.view;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -24,8 +25,10 @@ import java.util.ArrayList;
 
 import unicap.grafos.unicapmaps.AlgoritmosGrafo.ColoracaoWelshPowell;
 import unicap.grafos.unicapmaps.R;
-import unicap.grafos.unicapmaps.controller.BuscaDinamica;
+import unicap.grafos.unicapmaps.controller.AdapterTrajeto;
+import unicap.grafos.unicapmaps.controller.CarregarTrajetos;
 import unicap.grafos.unicapmaps.controller.GrafoController;
+import unicap.grafos.unicapmaps.controller.PesquisaDinamica;
 import unicap.grafos.unicapmaps.model.Aresta;
 import unicap.grafos.unicapmaps.model.Grafo;
 import unicap.grafos.unicapmaps.model.Rota;
@@ -84,10 +87,9 @@ public class Main extends AppCompatActivity {
         listaBuscaContainer = (RelativeLayout) findViewById(R.id.lista_busca_container);
         ListView listViewBusca = (ListView) findViewById(R.id.listaBusca);
 
-        inputPartida.addTextChangedListener(new BuscaDinamica(context, listViewBusca, inputPartida, rota, 0));
-        inputDestino.addTextChangedListener(new BuscaDinamica(context, listViewBusca, inputDestino, rota, 1));
+        inputPartida.addTextChangedListener(new PesquisaDinamica(context, listViewBusca, inputPartida, rota, 0));
+        inputDestino.addTextChangedListener(new PesquisaDinamica(context, listViewBusca, inputDestino, rota, 1));
     }
-
 
     public void tracarRota() {
         if(!rota.isComplete()){
@@ -108,40 +110,12 @@ public class Main extends AppCompatActivity {
         arestaView.setVisibility(View.VISIBLE);
     }
 
-    /*private boolean validarInputs() {
-        String inputTextPartida = inputPartida.getText().toString().trim();
-        String inputTextDestino = inputDestino.getText().toString().trim();
-        Boolean erro = false;
-
-        try{
-            idVerticeInicial = Integer.parseInt(inputTextPartida);
-        } catch (NumberFormatException e){
-            erro = true;
-        }
-
-        try{
-            idVerticeFinal = Integer.parseInt(inputTextDestino);
-        } catch (NumberFormatException e){
-            erro = true;
-        }
-
-        if(erro){
-            idVerticeInicial = -1;
-            idVerticeFinal = -1;
-        }
-
-
-        if(grafo.getVertice(idVerticeInicial) != null && grafo.getVertice(idVerticeFinal) != null){
-            return true;
-        }
-        return false;
-    }*/
-
     private void showInfo(ArrayList<Aresta> caminho) {
         LinearLayout infoTrajeto = (LinearLayout) findViewById(R.id.info_trajeto);
         TextView infoPartida = (TextView) infoTrajeto.getChildAt(0);
         TextView infoDestino = (TextView) infoTrajeto.getChildAt(1);
         TextView infoDistancia = (TextView) infoTrajeto.getChildAt(2);
+        Button botaoTrajeto = (Button) infoTrajeto.getChildAt(3);
 
         String nomePartida = grafo.getVertice(rota.getPartida()).getNome();
         String nomeDestino = grafo.getVertice(rota.getDestino()).getNome();
@@ -150,11 +124,36 @@ public class Main extends AppCompatActivity {
         infoPartida.setText("Partida: "+ nomePartida);
         infoDestino.setText("> Destino: "+ nomeDestino);
         infoDistancia.setText("Distância: " + distancia + " metros");
+
+        final Dialog trajetoDialog = new Dialog(this);
+        trajetoDialog.setContentView(R.layout.dialog_trajeto);
+
+        if(caminho == null || caminho.size() == 0){
+            trajetoDialog.setTitle("Fique onde está.");
+        } else{
+            trajetoDialog.setTitle("Descrição do trajeto");
+            preencherDialogTrajeto(caminho, trajetoDialog);
+        }
+
+        botaoTrajeto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                trajetoDialog.show();
+            }
+        });
+
+    }
+
+    private void preencherDialogTrajeto(ArrayList<Aresta> caminho, Dialog trajetoDialog) {
+        CarregarTrajetos carregarTrajetos = new CarregarTrajetos();
+        ArrayList<String> infoTrajeto = carregarTrajetos.buscarTrajeto(caminho);
+        ListView listViewTrajeto = (ListView) trajetoDialog.findViewById(R.id.list_view_trajeto);
+        AdapterTrajeto adapter = new AdapterTrajeto(this, infoTrajeto);
+        listViewTrajeto.setAdapter(adapter);
     }
 
     private ArrayList<Aresta> mostrarCaminho() {
         //caminho = buscaEscolhida;
-
         ArrayList<Aresta> caminho = grafoController.buscar(rota.getPartida(), rota.getDestino(), metodoBusca);
         if(caminho == null){
             return caminho;
@@ -205,10 +204,10 @@ public class Main extends AppCompatActivity {
 
         rota.reset();
 
-        inputPartida.setText("");
-        inputDestino.setText("");
         inputDestino.clearFocus();
         inputPartida.clearFocus();
+        inputPartida.setText("");
+        inputDestino.setText("");
         infoPartida.setText("");
         infoDestino.setText("");
         infoDistancia.setText("");

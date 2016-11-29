@@ -10,5 +10,5 @@ import unicap.grafos.unicapmaps.model.Vertice;
  */
 
 public interface InterfaceBuscaEmGrafo {
-    public ArrayList<Aresta> buscar(Vertice partida, Vertice chegada);
+    ArrayList<Aresta> buscar(Vertice partida, Vertice chegada);
 }

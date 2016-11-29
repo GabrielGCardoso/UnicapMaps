@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unicap.grafos.unicapmaps.view.ZoomLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:focusableInTouchMode="true"
+    android:id="@+id/mapaViewPort"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@id/my_toolbar"
+    android:background="@color/bg1"
+    >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        >
+        <RelativeLayout
+            android:id="@+id/mapa_conteudo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <ImageView
+                android:keepScreenOn="true"
+                android:isScrollContainer="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imagem_mapa"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:src="@drawable/mapa_vetor" />
+            <ImageView
+                android:id="@+id/arestaConteiner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+            </ImageView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/balao_local"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/balao_local"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:visibility="invisible"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red"
+                android:textSize="10dp"
+                android:textAllCaps="true"
+                android:text="Destino"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</unicap.grafos.unicapmaps.view.ZoomLayout>

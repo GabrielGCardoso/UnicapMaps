@@ -1,9 +1,12 @@
 package unicap.grafos.unicapmaps.AlgoritmosGrafo;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import unicap.grafos.unicapmaps.controller.GrafoController;
 import unicap.grafos.unicapmaps.model.Aresta;
+import unicap.grafos.unicapmaps.model.Grafo;
 import unicap.grafos.unicapmaps.model.Vertice;
 
 /**
@@ -12,67 +15,42 @@ import unicap.grafos.unicapmaps.model.Vertice;
 public class BuscaEmLargura implements InterfaceBuscaEmGrafo {
 
     private GrafoController controller;
+    private Grafo grafo;
 
     public BuscaEmLargura(GrafoController controller) {
+        grafo = Grafo.getInstance();
         this.controller = controller;
     }
 
-    public ArrayList<Aresta> buscar (Vertice inicio,Vertice fim){
+    @Override
+    public ArrayList<Aresta> buscar (Vertice partida,Vertice chegada){
 
-        Vertice current, proximoVertice;
-        ArrayList<Vertice> prox = new ArrayList<>();
-        ArrayList<Boolean> visitados = new ArrayList<>();
-        initArrayList(visitados);
+        Vertice current;
+        Queue<Vertice> fila = new LinkedList();
+        ArrayList<Vertice> visitados = new ArrayList();
+        ArrayList<Vertice> anteriores = new ArrayList();
 
-        //fila
-        ArrayList<Vertice> caminho = new ArrayList<>();
+        UtilBuscas.inicializar(anteriores);
+        fila.add(partida);
 
-        current = inicio;
-        caminho.add(current);
-        visitados.set(current.getId(), true);
+        while(!fila.isEmpty()){
+            current = fila.poll();
+            visitados.add(current);
 
-        while(!caminho.isEmpty()){
-            prox.addAll(getProximosVertices(current, visitados, prox));
+            if(current == chegada){
+                break;
+            }
 
-            // simulando uma fila
-            proximoVertice = prox.get(0);
-
-            if(proximoVertice == null || proximoVertice.getId() == fim.getId()){
-                caminho.add(current);
-                return controller.getArestasFromVertices(caminho);
-            }else{
-                //removendo para simular fila
-                prox.remove(0);
-
-                caminho.add(current);
-                visitados.set(current.getId(), true);
-                current = proximoVertice;
+            for(Vertice adjAtual: current.getAdjacentes()){
+                if(!visitados.contains(adjAtual) && !fila.contains(adjAtual)){
+                    fila.add(adjAtual);
+                    anteriores.set(adjAtual.getId(), current);
+                }
             }
         }
 
-        return controller.getArestasFromVertices(caminho);
-    }
-
-
-    private ArrayList<Vertice> getProximosVertices(Vertice current, ArrayList<Boolean> visitados, ArrayList<Vertice> proximos){
-        ArrayList<Vertice> ret = new ArrayList<>();
-        ArrayList<Vertice> adj = current.getAdjacentes();
-
-        for(int i = 0; i<adj.size(); i++){
-            Vertice v = adj.get(i);
-            // se ele nao foi visitado ou nao esta na lista de proximos
-            if(visitados.get(v.getId()) == false && !proximos.contains(v)){
-                ret.add(v);
-            }
-        }
-
-        return ret;
-    }
-
-    private void initArrayList(ArrayList<Boolean> visitados){
-        for(int i = 0; i < controller.getTotalVertices(); i++){
-            visitados.add(i, false);
-        }
+        ArrayList<Vertice> caminhoFinal = UtilBuscas.varrerAnteriores(anteriores, partida, chegada);
+        return controller.getArestasFromVertices(caminhoFinal);
     }
 
 }

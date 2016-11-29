@@ -16,10 +16,6 @@ import android.widget.RelativeLayout;
 
 import unicap.grafos.unicapmaps.R;
 
-/**
- * Layout that provides pinch-zooming of content. This view should have exactly one child
- * view containing the content.
- */
 public class ZoomLayout extends FrameLayout implements ScaleGestureDetector.OnScaleGestureListener, GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener{
 
     Context context;
@@ -28,8 +24,6 @@ public class ZoomLayout extends FrameLayout implements ScaleGestureDetector.OnSc
         DRAG,
         ZOOM
     }
-
-    boolean infoVisible = true;
 
     private static final String TAG = "ZoomLayout";
     private static float MIN_ZOOM = 1.0f;
@@ -133,9 +127,7 @@ public class ZoomLayout extends FrameLayout implements ScaleGestureDetector.OnSc
             }
 
         });
-
     }
-
 
     public void ajustScale(){
         float escalaInicial;
@@ -148,21 +140,6 @@ public class ZoomLayout extends FrameLayout implements ScaleGestureDetector.OnSc
         scale = escalaInicial;
         applyScaleAndTranslation();
     }
-
-    /*@Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        final int action = ev.getActionMasked();
-
-        if(action == MotionEvent.ACTION_MOVE || action == MotionEvent.ACTION_SCROLL){
-            return true;
-        }
-        if(action == MotionEvent.ACTION_POINTER_UP){
-            return false;
-        }
-
-        return false;
-
-    }*/
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
@@ -215,14 +192,6 @@ public class ZoomLayout extends FrameLayout implements ScaleGestureDetector.OnSc
     @Override
     public boolean onSingleTapConfirmed(MotionEvent e) {
         Log.i(TAG, "SingleTapConfirmed");
-        /*if(infoVisible){
-            esconderViews();
-            infoVisible = false;
-        } else{
-            mostrarViews();
-            infoVisible = true;
-        }
-        */
         return true;
     }
 

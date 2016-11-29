@@ -3,14 +3,9 @@ package unicap.grafos.unicapmaps.AlgoritmosGrafo;
 import android.graphics.Color;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.Stack;
 
-import unicap.grafos.unicapmaps.controller.GrafoController;
-import unicap.grafos.unicapmaps.model.Aresta;
 import unicap.grafos.unicapmaps.model.Grafo;
 import unicap.grafos.unicapmaps.model.Vertice;
 
@@ -21,7 +16,6 @@ import unicap.grafos.unicapmaps.model.Vertice;
 public class ColoracaoWelshPowell {
     Grafo grafo;
 
-
     public ColoracaoWelshPowell() {
         grafo = Grafo.getInstance();
     }
@@ -29,12 +23,10 @@ public class ColoracaoWelshPowell {
     public ArrayList<ArrayList> colorir(){
         ArrayList<Vertice> dependencias = new ArrayList<>();
         ArrayList<Vertice> paraRemover = new ArrayList<>();
-
         ArrayList<ArrayList> verticesComCores = new ArrayList();
 
-
         Queue<Vertice> filaVertices = ordenarVertices();
-        ArrayList<Integer> corVertices = iniciarArrayCores();
+        ArrayList<Integer> corVertices = new ArrayList();
         Queue<Integer> cores = iniciarCores();
         ArrayList<Vertice> verticesOrdenados = new ArrayList<>();
 
@@ -67,7 +59,6 @@ public class ColoracaoWelshPowell {
         return verticesComCores;
     }
 
-
     private Queue<Integer> iniciarCores(){
         Queue<Integer> cores = new LinkedList<>();
         cores.add(Color.RED);
@@ -79,15 +70,6 @@ public class ColoracaoWelshPowell {
         cores.add(Color.GRAY);
         cores.add(Color.WHITE);
         cores.add(Color.BLACK);
-        return cores;
-    }
-
-    private ArrayList<Integer> iniciarArrayCores(){
-        ArrayList<Integer> cores = new ArrayList<>();
-        int i;
-        /*for(i = 0; i < grafo.countVertices(); i++){
-            cores.add(0);
-        }*/
         return cores;
     }
 

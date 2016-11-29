@@ -3,10 +3,10 @@ package unicap.grafos.unicapmaps.controller;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import unicap.grafos.unicapmaps.dao.InfoBlocos;
 import unicap.grafos.unicapmaps.model.ResultadoPesquisa;
-
-import java.util.ArrayList;
 /**
  * Created by kilso on 23/11/2016.
  */
